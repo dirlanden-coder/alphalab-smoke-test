@@ -1,0 +1,1586 @@
+<!DOCTYPE html>
+
+<html lang="el">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>AlphaLab • Σελίδα 1 — Εισαγωγικό Ερωτηματολόγιο (v6)</title>
+<style>
+    :root{
+      --bg:#0f1115;
+      --panel:#161a21;
+      --muted:#a7b2c1;
+      --text:#e6edf3;
+      --accent:#58a6ff;
+      --line:#2a3140;
+      --card:#121721;
+      --chip:#202639;
+      --whybg:#202732;
+      --bad:#ff8393;
+      --ok:#7fd1a1;
+    }
+    .tone-1{ --tone:#8b8cff; }
+    .tone-2{ --tone:#5fd1b9; }
+    .tone-3{ --tone:#f0a444; }
+    .tone-4{ --tone:#ff7bb0; }
+    .tone-5{ --tone:#7cc1ff; }
+    .tone-6{ --tone:#a5d86e; }
+    .tone-7{ --tone:#c6a6ff; }
+
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font:16px/1.45 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,'Noto Sans',sans-serif}
+    a{color:var(--accent);text-decoration:none}
+    .wrap{max-width:980px;margin:0 auto;padding:28px 18px 64px}
+    header.hero{display:grid;gap:14px;margin-bottom:18px}
+    header.hero h1{font-size:1.6rem;margin:0 0 4px}
+    header.hero p.lead{color:var(--muted);margin:0}
+    .note{font-size:.92rem;color:var(--muted)}
+
+    .grid{display:grid;gap:14px}
+    .grid.cols2{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .grid.cols3{grid-template-columns:repeat(3,minmax(0,1fr))}
+    @media (max-width:820px){.grid.cols2,.grid.cols3{grid-template-columns:1fr}}
+
+    fieldset{
+      border:2px solid var(--tone,#2b64ff);
+      background:var(--panel);
+      border-radius:14px;
+      padding:16px;
+      position:relative
+    }
+    legend{padding:0 8px;color:#cbd4e2;display:flex;align-items:center;gap:8px}
+    legend .ico{font-size:1.1rem;opacity:.9}
+
+    label{display:flex;flex-direction:column;gap:6px}
+    input,select,button,textarea{border-radius:10px;border:1px solid var(--line);background:#0d1117;color:#e6edf3;padding:10px 12px;outline:none}
+    input::placeholder{color:#68707d}
+    input[type="date"]{color-scheme:dark}
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .chip{display:inline-flex;align-items:center;gap:6px;background:var(--chip);border:1px solid var(--line);border-radius:999px;padding:6px 10px;color:#cdd6e3;font-size:.86rem}
+    .muted{color:var(--muted)}
+    .help{margin-top:8px;color:#b0b7c3;font-size:.92rem}
+    .why{margin-top:10px;padding:12px 14px;border-left:4px solid var(--tone,#2b64ff);background:var(--whybg);border-radius:10px;color:#d4dceb;box-shadow:0 1px 0 rgba(0,0,0,.35) inset}
+    .why strong{color:#e3ecff}
+    .calc-card{background:var(--card);border:1px dashed var(--line);border-radius:12px;padding:12px 14px;display:grid;gap:6px}
+    .calc-card .value{font-weight:700;font-size:1.15rem;letter-spacing:.2px}
+    .kbd{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,"Liberation Mono","Courier New", monospace;background:#0b1020;border:1px solid #1e2540;border-radius:6px;padding:2px 6px}
+    .flex{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+    .section-title{margin:18px 0 8px;font-weight:700;color:#cfd8e6}
+    .divider{height:1px;background:var(--line);margin:8px 0}
+    .actions{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:18px}
+    button.cta{background:linear-gradient(180deg,#2383e2,#1466b6);border:1px solid #2d77c9}
+    button.cta:hover{filter:brightness(1.05)}
+    button.cta[disabled]{opacity:.5;cursor:not-allowed;filter:none}
+    /* secondary CTA for step 3. Appears as a lightweight button */
+    button.secondary-cta{
+      background:transparent;
+      border:none;
+      padding:0;
+      color:var(--accent);
+      font-size:.92rem;
+      text-decoration:underline;
+      cursor:pointer;
+    }
+    button.secondary-cta:hover{
+      filter:brightness(1.1);
+    }
+    .tag{background:#172033;border:1px solid #26314a;border-radius:6px;padding:2px 6px;color:#a6b3cc;font-size:.82rem}
+    .field-badge{display:inline-flex;align-items:center;margin-left:8px;padding:2px 8px;border-radius:999px;font-size:.76rem;font-weight:600;letter-spacing:.01em;width:max-content}
+    .badge-required{background:#1b2538;border:1px solid #31496d;color:#d9e7ff}
+    .badge-recommended{background:#1e2b1b;border:1px solid #3d6a39;color:#d9f7d2}
+    .badge-optional{background:#2a2130;border:1px solid #6b4a7a;color:#f0ddff}
+    .section-intro{margin-top:6px;color:#b7c2d3;font-size:.95rem}
+    .two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    @media (max-width:780px){.two-col{grid-template-columns:1fr}}
+    .radio-row, .check-row{display:flex;flex-wrap:wrap;gap:10px}
+    .radio-row label, .check-row label{flex-direction:row;align-items:center;gap:8px;background:#0e1320;border:1px solid var(--line);padding:6px 10px;border-radius:8px;cursor:pointer}
+    .radio-row input[type="radio"], .check-row input[type="checkbox"]{accent-color:#58a6ff}
+    .small{font-size:.85rem}
+    footer{margin-top:26px;color:#8f9ab0}
+
+    /* validation */
+    .invalid{outline:2px solid var(--bad);}
+    .req-status{font-size:.9rem}
+    .req-status.bad{color:var(--bad)}
+    .req-status.ok{color:var(--ok)}
+  
+    .field-meta{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:2px 0 2px}
+    .field-badge{margin-left:0}
+    .field-why{display:inline-flex;align-items:center;padding:2px 8px;border-radius:999px;font-size:.76rem;border:1px solid var(--line);background:#101722;color:#bfc9d8}
+    .legend-card{margin:10px 0 4px;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:#111827;color:#d9e3f0}
+    .legend-card .field-badge,.legend-card .field-why{margin-right:6px}
+    .legend-card p{margin:0 0 8px}
+    .legend-card .small{color:#aeb9ca}
+
+    /* 3‑step onboarding shell top bar */
+    #alOnbTopBar{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      background:var(--panel);
+      border-bottom:1px solid var(--line);
+      padding:12px 16px;
+      position:sticky;
+      top:0;
+      z-index:50;
+    }
+    #alOnbStepCounter{
+      font-size:.9rem;
+      color:var(--muted);
+      font-weight:600;
+    }
+    #alOnbStepTitle{
+      font-size:1.05rem;
+      font-weight:700;
+      flex-grow:1;
+      color:var(--text);
+      line-height:1.2;
+    }
+    /* Hide the legend of the basic info fieldset once moved into the shell */
+    #alOnbStep1 legend{
+      display:none;
+    }
+    /* Bottom bar polish */
+    #alOnbBottomBar{
+      margin-top:24px;
+      padding-top:16px;
+      border-top:1px solid var(--line);
+      background:var(--bg);
+      position:sticky;
+      bottom:0;
+      z-index:40;
+    }
+    #alOnbBottomBar .actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+    }
+    #alOnbBottomBar .actions > *{
+      margin-top:0;
+    }
+    #alOnbBottomBar .req-status{
+      flex-basis:100%;
+    }
+    @media (min-width:600px){
+      #alOnbBottomBar .actions{
+        flex-wrap:nowrap;
+        justify-content:space-between;
+        align-items:center;
+      }
+      #alOnbBottomBar .req-status{
+        flex-basis:auto;
+      }
+    }
+</style>
+
+<style id="al-test-persona-style">
+  #al-test-persona-panel{position:sticky;top:8px;z-index:9999;margin:0 0 16px;padding:14px 16px;border:2px solid #58a6ff;border-radius:14px;background:#0f1726;box-shadow:0 8px 24px rgba(0,0,0,.25)}
+  #al-test-persona-panel .al-test-title{font-weight:800;margin:0 0 10px;color:#eaf2ff}
+  #al-test-persona-panel .al-test-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  #al-test-persona-panel select,#al-test-persona-panel button{min-height:40px}
+  #al-test-persona-panel select{min-width:280px;background:#0b1220}
+  #al-test-persona-panel .al-mini{font-size:.82rem;color:#b9c6d8;margin-top:8px}
+  #al-test-persona-status{margin-top:8px;font-size:.84rem;color:#dbe7f7}
+  #al-test-persona-panel .btn-secondary{background:#132238;border:1px solid #31507e;color:#eaf2ff}
+</style>
+<!-- TEST-ONLY onboarding copy: retargeted to AlphaLab v16j HERO_FIXED_SUMMARY_V8 PASS_B patched report under test -->
+<!-- MIN TEST HARNESS FIX — onboarding retargeted to v16j destination only; transport/state only; no core engine changes -->
+<!-- Updated to point to the exact HERO_FIXED_SUMMARY_V8 PASS_B patched report file -->
+<meta content="AlphaLab_v16j__SIMPLIFIED__P02M__CHIP_STACK_MODE_V1__HERO_FIXED_SUMMARY_V8__PASS_B_PATCHED.html" name="al-report"/>
+</head>
+<body>
+<div class="wrap">
+<header class="hero">
+<h1>AlphaLab — Προσωποποιημένη ερμηνεία εξετάσεων</h1>
+<p class="lead">
+        Σε 2–3′ θα μας πεις λίγα βασικά στοιχεία για σένα και θα προσθέσεις, όπου τα γνωρίζεις, τις βασικές εξετάσεις που χρειάζονται για να βγει πιο σταθερή εικόνα. Εμείς θα ετοιμάσουμε <strong>έξυπνη ερμηνεία</strong> των τιμών σου και <strong>καθαρή εικόνα</strong> για το τι φαίνεται πιο ήρεμο και τι πιο επιβαρυμένο σήμερα.
+      </p><p>Οι παράμετροι που θα συμπληρώσεις στις επόμενες ενότητες θα βοηθήσουν να ετοιμάσουμε μια σαφή, συνολική εικόνα του μεταβολικού σου προφίλ.</p>
+<p class="note">Ιδιωτικότητα: δεν γίνεται ιατρική διάγνωση· τα δεδομένα σου μένουν τοπικά στη συσκευή σου και μπορείς να τα σβήσεις όποτε θες.</p>
+<div class="legend-card"><p>Τα badges δείχνουν τι χρειάζεται περισσότερο για να βγει καθαρό και σταθερό report.</p><span class="field-badge badge-required">Απαραίτητο</span><span class="field-why">Χρειάζεται για να χτιστεί η βασική εικόνα</span> <span class="field-badge badge-recommended">Συνιστώμενο</span><span class="field-why">Βελτιώνει κυρίως την αγγειακή, φλεγμονώδη ή ηπατική ερμηνεία</span> <span class="field-badge badge-optional">Προαιρετικό</span><span class="field-why">Χρήσιμο κυρίως για πιο προσωπική ερμηνεία</span> <div class="small">Η πραγματική μέση προτιμάται. Αν λείπει, μπορεί να χρησιμοποιηθεί εκτίμηση από ύψος και βάρος.</div></div></header>
+
+<div id="al-test-persona-panel" aria-label="Load test persona panel">
+  <div class="al-test-title">Έτοιμα προφίλ ελέγχου</div>
+  <div class="al-test-row">
+    <select id="al-test-persona-select">
+      <option value="">Επίλεξε έτοιμο προφίλ…</option>
+      <option value="GR-MARIA-22-ATH">Μαρία, 22, Αθήνα — βασικός πυρήνας εξετάσεων, χαμηλό φορτίο</option>
+      <option value="GR-GIANNIS-24-THESS">Γιάννης, 24, Θεσσαλονίκη — βασικός πυρήνας εξετάσεων, κάπνισμα και λίγο ύπνο</option>
+      <option value="GR-ELENI-27-PATRAS">Ελένη, 27, Πάτρα — βασικός πυρήνας εξετάσεων, κατά βάση καλή εικόνα</option>
+      <option value="GR-NIKOS-29-HER">Νίκος, 29, Ηράκλειο — βασικός πυρήνας εξετάσεων, ήπια μεταβολική επιβάρυνση</option>
+      <option value="GR-ANNA-31-ATH">Άννα, 31, Αθήνα — πλήρεις βασικές εξετάσεις, χαμηλό φορτίο</option>
+      <option value="GR-KOSTAS-33-LAR">Κώστας, 33, Λάρισα — πλήρεις εξετάσεις, οριακή επιβάρυνση</option>
+      <option value="GR-DIMITRA-35-VOL">Δήμητρα, 35, Βόλος — βασικός πυρήνας εξετάσεων, οικογενειακό καρδιαγγειακό ιστορικό</option>
+      <option value="GR-PANAGIOTIS-36-THESS">Παναγιώτης, 36, Θεσσαλονίκη — πλήρεις εξετάσεις, εικόνα αντίστασης στην ινσουλίνη/ήπατος</option>
+      <option value="GR-CHRISTINA-38-IOA">Χριστίνα, 38, Ιωάννινα — βασικός πυρήνας εξετάσεων, κυρίως χοληστερίνη</option>
+      <option value="GR-STELIOS-39-PIR">Στέλιος, 39, Πειραιάς — βασικός πυρήνας εξετάσεων, έντονο στρες και λίγο ύπνο</option>
+      <option value="GR-IOANNA-41-ATH">Ιωάννα, 41, Αθήνα — πλήρεις εξετάσεις, κυρίως λιπιδαιμική/καρδιαγγειακή εικόνα</option>
+      <option value="GR-MANOLIS-42-HER">Μανώλης, 42, Ηράκλειο — πλήρεις εξετάσεις, ηπατική επιβάρυνση χωρίς παχυσαρκία</option>
+      <option value="GR-SOFIA-44-PATRAS">Σοφία, 44, Πάτρα — πλήρεις εξετάσεις, φλεγμονώδης/βάρδιες εικόνα</option>
+      <option value="GR-VASILIS-45-LAR">Βασίλης, 45, Λάρισα — βασικός πυρήνας εξετάσεων, οριακή μεταβολική εικόνα</option>
+      <option value="GR-KATERINA-47-THESS">Κατερίνα, 47, Θεσσαλονίκη — πλήρεις εξετάσεις, γυναικείο καρδιομεταβολικό προφίλ</option>
+      <option value="GR-DIMITRIS-49-ATH">Δημήτρης, 49, Αθήνα — πλήρεις εξετάσεις, κλασική προμεταβολική εικόνα</option>
+      <option value="GR-LINA-52-VOL">Λίνα, 52, Βόλος — βασικός πυρήνας εξετάσεων, τάση προς ζάχαρο/τριγλυκερίδια</option>
+      <option value="GR-GIORGOS-54-KAL">Γιώργος, 54, Καλαμάτα — πλήρεις εξετάσεις, υψηλό συνολικό φορτίο</option>
+      <option value="GR-EIRINI-57-LAR">Ειρήνη, 57, Λάρισα — πλήρεις εξετάσεις, διαβητική εικόνα χωρίς παχυσαρκία</option>
+      <option value="GR-ANTONIS-60-THESS">Αντώνης, 60, Θεσσαλονίκη — βασικός πυρήνας εξετάσεων, ηλικιακό και ιστορικό βάρος</option>
+    </select>
+    <button class="btn-secondary" id="al-fill-persona-btn" type="button">Συμπλήρωση όλων</button>
+    <button class="cta" id="al-fill-and-continue-btn" type="button">Συμπλήρωση + συνέχεια</button>
+  </div>
+  <div class="al-mini">20 συνθετικά ελληνικά αστικά προφίλ για γρήγορο έλεγχο του onboarding και του report. Όλα περιλαμβάνουν πλέον τον βασικό πυρήνα των νέων απαραίτητων εργαστηριακών πεδίων, ενώ αρκετά κρατούν κενά στα συνιστώμενα πεδία για έλεγχο μερικών δεδομένων.</div>
+  <div id="al-test-persona-desc" class="al-mini" style="margin-top:6px;color:#eaf2ff">Επίλεξε ένα προφίλ για να δεις σύντομη ιατρική περιγραφή.</div>
+  <div id="al-test-persona-status">Έτοιμο.</div>
+</div>
+
+<form autocomplete="on" class="grid" id="onboardingForm" novalidate="">
+    <!-- Begin new 3‑step onboarding shell -->
+    <div id="alOnbShell" data-step="1">
+      <!-- Persistent top bar -->
+      <div id="alOnbTopBar">
+        <div id="alOnbStepCounter">1/3</div>
+        <div id="alOnbStepTitle">Ξεκινά η εικόνα σου</div>
+      </div>
+      <!-- Step 1 Panel -->
+      <div id="alOnbStep1" class="alOnbStep">
+        <div class="alOnbTop">
+          <div id="alOnbStep1Title" class="step-title">Ξεκινά η εικόνα σου</div>
+          <div id="alOnbStep1Subtitle" class="step-subtitle">Με λίγα βασικά στοιχεία ξεκινά η πρώτη εκδοχή της μεταβολικής σου εικόνας.</div>
+          <div id="alOnbStep1Reward" class="step-reward">Με αυτά τα στοιχεία ξεκινά η βασική μεταβολική εικόνα σου.</div>
+        </div>
+        <div id="alOnbStep1Fields"></div>
+        <div id="alOnbStep1Why" class="step-why"></div>
+      </div>
+      <!-- Step 2 Panel -->
+      <div id="alOnbStep2" class="alOnbStep" style="display:none;">
+        <div class="alOnbTop">
+          <div id="alOnbStep2Title" class="step-title">Κάν’ το πιο προσωπικό</div>
+          <div id="alOnbStep2Subtitle" class="step-subtitle">Αυτά τα στοιχεία μας βοηθούν να καταλάβουμε καλύτερα γιατί η εικόνα σου γέρνει προς μία κατεύθυνση.</div>
+          <div id="alOnbStep2Reward" class="step-reward">Τώρα το report σου γίνεται πιο προσωπικό.</div>
+        </div>
+        <div id="alOnbSectionLifestyle" class="alOnbSection">
+          <div class="section-title">Καθημερινότητα</div>
+          <div class="section-helper">Η καθημερινότητά σου επηρεάζει το πώς διαβάζεται η εικόνα σου και πόσο χρήσιμο θα είναι το report στην πράξη.</div>
+        </div>
+        <div id="alOnbSectionHistory" class="alOnbSection">
+          <div class="section-title">Ιστορικό</div>
+          <div class="section-helper">Αυτά αλλάζουν σημαντικά το πώς διαβάζεται η εικόνα σου.</div>
+        </div>
+        <div id="alOnbSectionCardio" class="alOnbSection">
+          <div class="section-title">Καρδιομεταβολικό πλαίσιο</div>
+          <div class="section-helper">Αυτά βελτιώνουν κυρίως το καρδιομεταβολικό πλαίσιο της εικόνας σου.</div>
+        </div>
+        <div id="alOnbStep2Why" class="step-why"></div>
+      </div>
+      <!-- Step 3 Panel -->
+      <div id="alOnbStep3" class="alOnbStep" style="display:none;">
+        <div class="alOnbTop">
+          <div id="alOnbStep3Title" class="step-title">Ξεκλείδωσε πιο πλήρες report</div>
+          <div id="alOnbStep3Subtitle" class="step-subtitle">Με λίγες εξετάσεις το αποτέλεσμα γίνεται πιο σταθερό, πιο προσωπικό και πιο πλούσιο.</div>
+          <div id="alOnbStep3Intro" class="step-intro">Μπορείς να δεις report και χωρίς όλες τις εξετάσεις. Αν όμως προσθέσεις όσα γνωρίζεις, θα πάρεις πιο πλήρη εικόνα.</div>
+        </div>
+        <div id="alOnbLabsCore" class="alOnbSection">
+          <div class="section-title">Core εξετάσεις</div>
+        </div>
+        <div id="alOnbLabsInflammation" class="alOnbSection">
+          <div class="section-title">Εξετάσεις φλεγμονής</div>
+        </div>
+        <div id="alOnbLabsExtra" class="alOnbSection">
+          <div class="section-title">Επιπλέον λεπτομέρειες</div>
+        </div>
+        <div id="alOnbRewardMeter" class="reward-meter"></div>
+        <div id="alOnbRewardHint" class="reward-hint"></div>
+      </div>
+      <!-- Bottom bar for actions -->
+      <div id="alOnbBottomBar"></div>
+    </div>
+    <!-- End new 3‑step onboarding shell -->
+<!-- A) Βασικά στοιχεία -->
+<fieldset class="tone-1">
+<legend><span class="ico">👤</span>A) Βασικά στοιχεία</legend>
+<div class="grid cols3">
+<label>Ημερομηνία γέννησης
+            <!-- Made optional to simplify offline testing; required attribute removed -->
+<div class="field-meta"><span class="field-badge badge-required">Απαραίτητο</span><span class="field-why">Χρειάζεται για να γίνει προσωπική η εκτίμηση και ιδιαίτερα για την αγγειακή ηλικία.</span></div><input id="dob" type="date" value=""/>
+</label>
+<label>Φύλο κατά γέννηση
+            <div class="field-meta"><span class="field-badge badge-required">Απαραίτητο</span><span class="field-why">Χρειάζεται για να γίνει σωστά η βασική μεταβολική και αγγειακή εκτίμηση.</span></div><select id="sex" required="">
+<option disabled="" selected="" value="">Επίλεξε</option>
+<option value="male">Άνδρας</option>
+<option value="female">Γυναίκα</option>
+</select>
+</label>
+<div class="calc-card">
+<div class="flex"><strong>BMI</strong><span class="tag">αυτόματος</span></div>
+<div class="value" id="bmiVal">—</div>
+<div class="muted small">Υπολογίζεται από ύψος και βάρος.</div>
+</div>
+</div>
+<div class="row" style="margin-top:10px">
+<label>Ύψος (cm)
+            <div class="field-meta"><span class="field-badge badge-required">Απαραίτητο</span><span class="field-why">Χρειάζεται κυρίως για τον BMI και τη βασική μεταβολική εικόνα.</span></div><input id="height" inputmode="numeric" max="230" min="100" placeholder="π.χ. 172" required="" step="1" type="number"/>
+</label>
+<label>Βάρος (kg)
+            <div class="field-meta"><span class="field-badge badge-required">Απαραίτητο</span><span class="field-why">Χρειάζεται κυρίως για τον BMI και τη βασική μεταβολική εικόνα.</span></div><input id="weight" inputmode="numeric" max="250" min="30" placeholder="π.χ. 78" required="" step="0.1" type="number"/>
+</label>
+</div>
+<div class="two-col" style="margin-top:10px">
+<label>Περιφέρεια μέσης (cm)
+            <div class="field-meta"><span class="field-badge badge-recommended">Συνιστώμενο</span><span class="field-why">Χρειάζεται κυρίως για το κοιλιακό λίπος και το μεταβολικό σύνδρομο.</span></div><input id="waist_measured" inputmode="numeric" max="200" min="40" placeholder="π.χ. 94 (στον ομφαλό, χαλαρά)" step="0.1" type="number"/>
+<small class="help">Αν τη γνωρίζεις, βοηθά πολύ. Αν όχι, το report μπορεί να βγει και χωρίς αυτήν.</small>
+</label>
+<div aria-live="polite" class="calc-card">
+<div class="flex">
+<strong>Υπολογιζόμενη περίμετρος μέσης (cm)</strong><span class="tag">live</span>
+</div>
+<div class="value" id="waist_est">—</div>
+<div class="muted small" id="waist_hint">Συμπλήρωσε <em>ημ. γέννησης</em>, <em>φύλο</em>, <em>ύψος</em> &amp; <em>βάρος</em> για να γίνει εκτίμηση.</div>
+<div class="muted small" style="margin-top:6px">
+              Μοντέλο <strong>AlphaLab</strong> εκπαιδευμένο σε ~<strong>50.000</strong> δείγματα (NHANES).
+              Μέση απόκλιση ~<strong>2–5%</strong> έναντι πραγματικής μέτρησης.
+              <em>Αν βάλεις πραγματική μέση, αυτή υπερισχύει.</em>
+<br/>Σημ.: Το φύλο επηρεάζει λίγο την εκτίμηση (συνήθως ~0.5 cm).
+            </div>
+<details class="small">
+<summary>Τύπος υπολογισμού</summary>
+<div class="help">
+                sex: Άνδρας=1, Γυναίκα=2<br/>
+<code>WC = 27.9302 + (−0.5616×sex) + (0.1483×age) + (1.1598×BMI) + (0.3903×weight_kg)</code>
+</div>
+</details>
+</div>
+</div>
+<div class="why">
+          ⓘ <strong>Γιατί ρωτάμε;</strong> Η ηλικία, το φύλο, ο BMI και η μέση είναι βασικά για Μεταβολικό Σύνδρομο και δείκτες αντίστασης στην ινσουλίνη/κατανομή λίπους.
+        </div>
+</fieldset>
+<!-- B) Υποκείμενα νοσήματα -->
+<fieldset class="tone-2">
+<legend><span class="ico">🏥</span>B) Υποκείμενα νοσήματα</legend>
+<div class="grid cols2">
+<label>Έχεις υψηλή πίεση ή παίρνεις χάπια για πίεση;
+            <div class="field-meta"><span class="field-badge badge-recommended">Συνιστώμενο</span><span class="field-why">Χρειάζεται κυρίως για την αγγειακή ηλικία.</span></div><select id="htn">
+<option disabled="" selected="" value="">Επίλεξε</option>
+<option value="yes">Ναι</option>
+<option value="no">Όχι</option>
+<option value="unk">Δεν ξέρω</option>
+</select>
+<small class="help">Χρειάζεται κυρίως για την αγγειακή ηλικία.</small>
+<div class="flex small" style="margin-top:6px;gap:8px">
+<button aria-controls="bpQuickHelp" aria-expanded="false" class="tag" id="bpQuickBtn" type="button">Πώς να μετρήσω τώρα;</button>
+</div>
+<div class="help" hidden="" id="bpQuickHelp">
+<ul style="margin:6px 0 0 18px">
+<li>Κάτσε ήρεμα <strong>5′</strong> πριν τη μέτρηση· μην μιλάς.</li>
+<li><strong>30′</strong> πριν: χωρίς καφέ/κάπνισμα/άσκηση· άδειο στομάχι/κύστη.</li>
+<li>Κάθισε με <strong>πλάτη</strong> &amp; <strong>χέρι</strong> υποστηριγμένα, <strong>πόδια</strong> στο πάτωμα, περιχειρίδα στο <strong>ύψος καρδιάς</strong> πάνω σε γυμνό χέρι.</li>
+<li>Πάρε <strong>2–3 μετρήσεις</strong> (με 1′ διάλειμμα) και κράτα τον <strong>μέσο όρο</strong>.</li>
+<li><em>Ενδεικτικά κατώφλια:</em> <strong>Σπίτι: ≥135/85</strong> θεωρείται υψηλή· <strong>Ιατρείο: ≥140/90</strong>.</li>
+</ul>
+</div>
+<small class="help">
+              Αν δεν ξέρεις: στο <strong>σπίτι</strong> (μέσος όρος 2–3 μετρήσεων), <strong>≥135/85</strong> θεωρείται υψηλή· στο <strong>ιατρείο</strong>, <strong>≥140/90</strong>.
+              Πώς να μετρήσεις σωστά: κάτσε ήρεμα <strong>5′</strong>, μην έχεις πιει καφέ/καπνίσει ή ασκηθεί <strong>30′</strong>, πλάτη-χερι υποστηριγμένα, πόδια στο πάτωμα.
+            </small>
+</label>
+<label>Έχεις υψηλό σάκχαρο ή διαβήτη (παίρνεις χάπια/ινσουλίνη);
+            <div class="field-meta"><span class="field-badge badge-recommended">Συνιστώμενο</span><span class="field-why">Χρειάζεται κυρίως για την εικόνα σακχάρου και για πιο σωστή καρδιομεταβολική εκτίμηση.</span></div><select id="dm_status">
+<option disabled="" selected="" value="">Επίλεξε</option>
+<option value="none">Κανένα</option>
+<option value="pre">Προδιαβήτη</option>
+<option value="t2d">Διαβήτη τύπου 2</option>
+<option value="t1d">Διαβήτη τύπου 1</option>
+<option value="unk">Δεν ξέρω</option>
+</select>
+<small class="help">
+              Αν δεν ξέρεις: διαβήτης συνήθως με <strong>νηστείας ≥126 mg/dL</strong> ή <strong>HbA1c ≥6.5%</strong> (επιβεβαίωση από ιατρό).
+              Αν επιλέξεις «Δεν ξέρω», προσωρινά <em>δεν</em> μετρά ως «Ναι» στους δείκτες.
+            </small>
+</label>
+</div>
+<div class="why">ⓘ <strong>Γιατί ρωτάμε;</strong> ΧΝΝ &amp; διαβήτης ανεβάζουν καρδιαγγειακό κίνδυνο· ο υποθυρεοειδισμός συχνά επηρεάζει τα λιπίδια.</div>
+</fieldset>
+<!-- C) Καρδιά -->
+<fieldset class="tone-3">
+<legend><span class="ico">❤️</span>C) Καρδιά</legend>
+<div class="section-title">Διάλεξε όσα ισχύουν:</div>
+<div class="row" style="margin-top:10px">
+<!-- Lp(a) block inserted by patch -->
+<div class="field" id="field-lpa">
+<label for="lpa_status"><strong>Lp(a) — Λιποπρωτεΐνη (α)</strong></label><div class="field-meta"><span class="field-badge badge-recommended">Συνιστώμενο</span><span class="field-why">Χρειάζεται κυρίως για πιο σωστή αγγειακή εκτίμηση.</span></div>
+<div style="display:flex; gap:16px; flex-wrap:wrap; margin-top:6px;">
+<label><input checked="" name="lpa_status" type="radio" value="unknown"/> Δεν γνωρίζω</label>
+<label><input name="lpa_status" type="radio" value="normal"/> Φυσιολογική (&lt;50 mg/dL)</label>
+<label><input name="lpa_status" type="radio" value="high"/> Αυξημένη (≥50 mg/dL)</label>
+</div>
+<div style="color:#6b7280; font-size:12px; margin-top:6px;">
+    Η Lp(a) είναι κληρονομικός δείκτης κινδύνου και βοηθά κυρίως την αγγειακή εκτίμηση.
+  </div>
+</div>
+<label>Έχεις καρδιακή πάθηση (ASCVD — έμφραγμα/στεντ/bypass, στηθάγχη, καρωτίδες/ανεύρυσμα· αρρυθμίες/βηματοδότης/κολπική μαρμαρυγή· καρδιακή ανεπάρκεια· βαλβιδοπάθεια);<div class="field-meta"><span class="field-badge badge-recommended">Συνιστώμενο</span><span class="field-why">Χρειάζεται κυρίως για πιο σωστή αγγειακή εκτίμηση.</span></div><select id="heart_disease"><option disabled="True" selected="True" value="">Επίλεξε</option><option value="yes">Ναι</option><option value="no">Όχι</option><option value="unk">Δεν ξέρω</option></select></label><label>Οικογενειακό ιστορικό “πρώιμης” καρδιοπάθειας (γονείς/αδέρφια: άνδρας &lt;55, γυναίκα &lt;65)
+            <div class="field-meta"><span class="field-badge badge-recommended">Συνιστώμενο</span><span class="field-why">Χρειάζεται κυρίως για πιο σωστή αγγειακή εκτίμηση.</span></div><select id="fh_cvd">
+<option disabled="" selected="" value="">Επίλεξε</option>
+<option value="yes">Ναι</option>
+<option value="no">Όχι</option>
+<option value="unk">Δεν ξέρω</option>
+</select>
+</label>
+</div>
+<div class="why">
+<!-- RC7 summary: συντομεύουμε την επεξήγηση σε δύο γραμμές και προσθέτουμε tooltip για λεπτομέρειες -->
+<span class="info-icon" title="Παθήσεις όπως η αθηροσκληρωτική νόσος, οι αρρυθμίες και η καρδιακή ανεπάρκεια μπορούν να αλλάξουν τους θεραπευτικούς στόχους για χοληστερίνη και αρτηριακή πίεση και να απαιτήσουν ειδική αγωγή. Δήλωσε όσες καταστάσεις ισχύουν για πιο εξατομικευμένη εκτίμηση.">ⓘ</span>
+<strong>Γιατί ρωτάμε;</strong> Ορισμένες καρδιακές παθήσεις επηρεάζουν τους στόχους λιπιδίων και την παρακολούθηση. Δήλωσε ό,τι ισχύει.
+        </div>
+</fieldset>
+<!-- D) Φάρμακα -->
+<fieldset class="tone-4" hidden="">
+<legend><span class="ico">💊</span>D) Φάρμακα (απλοποιημένα)</legend>
+<div class="grid cols2">
+<label>Παίρνεις φάρμακα για χοληστερίνη/τριγλυκερίδια;
+            <select id="lipid_meds">
+<option disabled="" selected="" value="">Επίλεξε</option>
+<option value="none">Καμία</option>
+<option value="statin">Στατίνη</option>
+<option value="statin_eze">Στατίνη+Εζετιμίμπη</option>
+<option value="pcsk9">PCSK9</option>
+<option value="omega3">Ω-3</option>
+<option value="unk">Δεν ξέρω</option>
+</select>
+</label>
+<label>Παίρνεις αντιπηκτικό ή αντιαιμοπεταλιακό;
+            <select id="antithrombotic">
+<option disabled="" selected="" value="">Επίλεξε</option>
+<option value="doac">DOAC (π.χ. apixaban, rivaroxaban)</option>
+<option value="warfarin">Βαρφαρίνη</option>
+<option value="antiplatelet">Αντιαιμοπεταλιακό (π.χ. Salospir, Plavix)</option>
+<option value="none">Όχι</option>
+<option value="unk">Δεν ξέρω</option>
+</select>
+</label>
+</div>
+<label style="margin-top:10px">Παίρνεις αγωγή για διάθεση/άγχος/ύπνο;
+          <select id="psych_meds">
+<option disabled="" selected="" value="">Επίλεξε</option>
+<option value="none">Όχι</option>
+<option value="antipsychotic">Ναι — Αντιψυχωσικό</option>
+<option value="other">Ναι — Άλλο (αντικαταθλιπτικό/ηρεμιστικό/ύπνου)</option>
+<option value="unk">Δεν ξέρω</option>
+</select>
+</label>
+<div class="why">ⓘ <strong>Γιατί ρωτάμε;</strong> Η αγωγή επηρεάζει στόχους και παρακολούθηση (π.χ. INR για βαρφαρίνη, μεταβολική παρακολούθηση για αγωγή διάθεσης/άγχους/ύπνου).</div>
+</fieldset>
+<!-- E) Συνήθειες, Ύπνος & Εργασία -->
+<fieldset class="tone-5">
+<legend><span class="ico">🧭</span>E) Συνήθειες, Ύπνος &amp; Εργασία</legend>
+<label>Ποια είναι η σχέση σας με το κάπνισμα;
+          <div class="field-meta"><span class="field-badge badge-recommended">Συνιστώμενο</span><span class="field-why">Χρειάζεται κυρίως για πιο σωστή αγγειακή εκτίμηση.</span></div><select id="smoking">
+<option disabled="" selected="" value="">Επίλεξε</option>
+<option value="never">Δεν έχω καπνίσει ποτέ ή έχω καπνίσει ελάχιστα</option>
+<option value="former">Κάπνιζα παλαιότερα, αλλά δεν καπνίζω τώρα</option>
+<option value="current">Καπνίζω τώρα</option>
+</select>
+<small class="help">"Παλαιότερα" = έχεις καπνίσει ουσιαστικά στο παρελθόν αλλά δεν καπνίζεις τώρα.</small>
+</label>
+<!-- Νέο ενοποιημένο πεδίο για σωματική δραστηριότητα και καθιστική ζωή -->
+<label>Σωματική δραστηριότητα &amp; αθλητική ζωή
+          <div class="field-meta"><span class="field-badge badge-optional">Προαιρετικό</span><span class="field-why">Χρησιμεύει κυρίως για πιο προσωπική ερμηνεία του τρόπου ζωής.</span></div><select id="pa_sed_profile">
+<option disabled="" selected="" value="">Επίλεξε</option>
+<option value="H_MVPA_LowSit">Πολύ ενεργός – λίγο καθιστός στη δουλειά</option>
+<option value="H_MVPA_HighSit">Κάνει πολλή άσκηση αλλά δουλεύει κυρίως καθιστός</option>
+<option value="M_MVPA_LowSit">Κινείται αρκετά και δεν κάθεται πολύ</option>
+<option value="M_MVPA_MidSit">Μέτρια άσκηση και αρκετή καθιστική δουλειά</option>
+<option value="L_MVPA_LowSit">Λίγη άσκηση αλλά γενικά όρθιος/ενεργός στη μέρα</option>
+<option value="L_MVPA_MidHighSit">Λίγη άσκηση και πολύ κάθισμα</option>
+<option value="No_MVPA_HighSit">Καθιστική ζωή χωρίς άσκηση</option>
+<option value="Other_PA_Pattern">Άλλο πρόγραμμα (π.χ. σποραδική άσκηση ή μικτό ωράριο)</option>
+</select>
+<small class="help">Διάλεξε αυτό που σε περιγράφει καλύτερα τον τελευταίο καιρό. Συνυπολόγισε και την καθημερινή κίνηση και την άσκηση ή αθλητική συνήθεια σου — δεν χρειάζεται να είναι τέλειο, μια ρεαλιστική εικόνα αρκεί.</small>
+</label>
+<div class="two-col">
+<label style="display:none">Κίνηση (ανά εβδομάδα) — Αερόβια
+            <select id="aerobic">
+<option disabled="" selected="" value="">Επίλεξε</option>
+<option value="&lt;150">&lt;150′ (π.χ. λίγο περπάτημα)</option>
+<option value="150-300">150–300′ (π.χ. γρήγορο περπάτημα, χαλαρό ποδήλατο, κολύμπι)</option>
+<option value="&gt;300">&gt;300′</option>
+</select>
+</label>
+<label style="display:none">Κίνηση (ανά εβδομάδα) — Ενδυνάμωση
+            <select id="strength">
+<option disabled="" selected="" value="">Επίλεξε</option>
+<option value="0">0 φορές (καθόλου)</option>
+<option value="1">1 φορά</option>
+<option value="&gt;=2">≥ 2 φορές (π.χ. βάρη, λάστιχα, καθίσματα/κάμψεις)</option>
+</select>
+</label>
+</div>
+<div class="two-col">
+<label style="display:none">Είδος δουλειάς
+            <select id="job_type">
+<option disabled="" selected="" value="">Επίλεξε</option>
+<option value="sedentary">Κυρίως καθιστική</option>
+<option value="standing">Ορθοστασία–ήπια κίνηση</option>
+<option value="manual">Βαριά χειρωνακτική</option>
+</select>
+</label>
+<label style="display:none">Βάρδιες/Νυχτερινή εργασία
+            <select id="shifts">
+<option disabled="" selected="" value="">Επίλεξε</option>
+<option value="none">Όχι</option>
+<option value="occasional">Περιστασιακές</option>
+<option value="frequent">Συχνές ή Νυχτερινές</option>
+</select>
+</label>
+</div>
+<div class="two-col">
+<label>Πόσες ώρες κοιμάστε συνήθως κάθε βράδυ;
+            <div class="field-meta"><span class="field-badge badge-recommended">Συνιστώμενο</span><span class="field-why">Χρειάζεται κυρίως για πιο σωστή αγγειακή εκτίμηση.</span></div><select id="sleep_hours">
+<option disabled="" selected="" value="">Επίλεξε</option>
+<option value="lt5">Λιγότερο από 5 ώρες</option>
+<option value="5to6">5 έως λιγότερο από 6 ώρες</option>
+<option value="6to7">6 έως λιγότερο από 7 ώρες</option>
+<option value="7to8">7 έως 8 ώρες</option>
+<option value="gt8">Περισσότερες από 8 ώρες</option>
+</select>
+<small class="help">Βοηθά κυρίως να γίνει πιο σωστή η αγγειακή και καρδιομεταβολική εκτίμηση.</small>
+</label>
+</div>
+<div class="why">ⓘ <strong>Γιατί ρωτάμε;</strong> Κάπνισμα, άσκηση, ύπνος και βάρδιες επηρεάζουν TG/HDL, γλυκόζη, φλεγμονή και βάρος — άρα στόχους και ερμηνεία εξετάσεων.</div>
+</fieldset>
+<!-- Διαγράφηκε το κεφάλαιο G) Διατροφή στη νέα έκδοση (RC5) -->
+<!-- H) Αλκοόλ (single-field lifestyle screen) -->
+<fieldset class="tone-6">
+<legend><span class="ico">🍷</span>H) Αλκοόλ</legend>
+<div class="grid cols2">
+<label>Πόσο συχνά πίνετε 4+ ποτά (αν είστε γυναίκα) ή 5+ ποτά (αν είστε άνδρας) σε μία περίσταση;
+            <div class="field-meta"><span class="field-badge badge-optional">Προαιρετικό</span><span class="field-why">Χρησιμεύει κυρίως για πιο σωστή αγγειακή εκτίμηση όταν υπάρχει.</span></div><select id="alcohol_binge_freq">
+<option disabled="" selected="" value="">Επίλεξε</option>
+<option value="never">Ποτέ</option>
+<option value="lt_monthly">Λιγότερο από 1 φορά τον μήνα</option>
+<option value="monthly_1_3">1 έως 3 φορές τον μήνα</option>
+<option value="weekly_plus">1 ή περισσότερες φορές την εβδομάδα</option>
+</select>
+<small class="help">Η ερώτηση στοχεύει σε πιο επιβαρυντική κατανάλωση, όχι σε κάθε χρήση αλκοόλ.</small>
+</label>
+</div>
+<div class="why">ⓘ <strong>Γιατί ρωτάμε;</strong> Η βαριά κατανάλωση αλκοόλ βοηθά κυρίως στη λεπτομερέστερη αγγειακή και μεταβολική ερμηνεία όταν είναι γνωστή.</div>
+</fieldset>
+<!-- I) Μόνο για γυναίκες -->
+<!-- Το μπλοκ αυτό αφαιρέθηκε στο RC7: τα πεδία PCOS/Εμμηνόπαυση δεν είναι πλέον μέρος της φόρμας.  Κρατάμε το σχόλιο για ιστορικούς λόγους. -->
+<!-- Εξετάσεις (προαιρετικά) για ενεργοποίηση FULL mode στο Report -->
+<fieldset class="tone-5" id="labsSection" style="margin-top:1rem;">
+<legend><span class="ico">🧪</span>Εξετάσεις</legend><div class="help section-intro">Συμπλήρωσε ιδανικά πρώτα τα απαραίτητα εργαστηριακά πεδία. Για το βασικό εργαστηριακό report ζητάμε κυρίως: Ολική χοληστερόλη, HDL, Τριγλυκερίδια, Γλυκόζη και Ουδετερόφιλα. Τα υπόλοιπα βελτιώνουν κυρίως την αγγειακή, φλεγμονώδη και ηπατική εικόνα.</div><div class="help" style="margin-top:4px;color:#a6b3cc">Η πραγματική μέση προτιμάται. Αν λείπει, μπορεί να χρησιμοποιηθεί εκτίμηση από ύψος και βάρος.</div>
+<div class="grid cols2">
+<label>Ολική χοληστερίνη (TC) mg/dL 
+<div class="field-meta"><span class="field-badge badge-required">Απαραίτητο</span><span class="field-why">Χρειάζεται κυρίως για την αγγειακή ηλικία.</span></div><input id="lab_tc" max="400" min="50" placeholder="π.χ. 200" step="1" type="number"/>
+</label>
+<label>HDL (mg/dL) 
+<div class="field-meta"><span class="field-badge badge-required">Απαραίτητο</span><span class="field-why">Χρειάζεται κυρίως για την εικόνα σακχάρου, λιπιδίων και φλεγμονής.</span></div><input id="lab_hdl" max="150" min="10" placeholder="π.χ. 50" step="1" type="number"/>
+</label>
+<label>Τριγλυκερίδια (TG) mg/dL 
+<div class="field-meta"><span class="field-badge badge-required">Απαραίτητο</span><span class="field-why">Χρειάζεται κυρίως για την εικόνα σακχάρου, λιπιδίων και ήπατος.</span></div><input id="lab_tg" max="600" min="20" placeholder="π.χ. 150" step="1" type="number"/>
+</label>
+<label>Συστολική πίεση (SBP) mmHg 
+<div class="field-meta"><span class="field-badge badge-recommended">Συνιστώμενο</span><span class="field-why">Χρειάζεται κυρίως για την αγγειακή ηλικία.</span></div><input id="lab_sbp" max="200" min="80" placeholder="π.χ. 120" step="1" type="number"/>
+<small class="help">Χρειάζεται κυρίως για την αγγειακή ηλικία.</small>
+</label>
+<!-- Νέα πεδία για την Ενισχυμένη Πρόγνωση & τριάδα IR -->
+<label>Γλυκόζη νηστείας (GLU) mg/dL 
+<div class="field-meta"><span class="field-badge badge-required">Απαραίτητο</span><span class="field-why">Χρειάζεται κυρίως για την εικόνα σακχάρου και ινσουλίνης.</span></div><input id="lab_glu" max="400" min="40" placeholder="π.χ. 95" step="1" type="number"/>
+</label>
+<label>Ουδετερόφιλα (NEU) ×10³/μL 
+<div class="field-meta"><span class="field-badge badge-required">Απαραίτητο</span><span class="field-why">Χρειάζεται κυρίως για την εικόνα φλεγμονής.</span></div><input id="lab_neu" max="20" min="0" placeholder="π.χ. 3.5" step="0.1" type="number"/>
+</label>
+<label>Λεμφοκύτταρα (LYM) ×10³/μL 
+<div class="field-meta"><span class="field-badge badge-recommended">Συνιστώμενο</span><span class="field-why">Χρειάζεται κυρίως για την εικόνα φλεγμονής.</span></div><input id="lab_lym" max="10" min="0" placeholder="π.χ. 2.5" step="0.1" type="number"/>
+</label>
+<label>Αιμοπετάλια (PLT) ×10³/μL 
+<div class="field-meta"><span class="field-badge badge-recommended">Συνιστώμενο</span><span class="field-why">Χρειάζεται κυρίως για την εικόνα φλεγμονής.</span></div><input id="lab_plt" max="1000" min="50" placeholder="π.χ. 240" step="1" type="number"/>
+</label>
+<label>Ουρικό οξύ (UA) mg/dL 
+<div class="field-meta"><span class="field-badge badge-recommended">Συνιστώμενο</span><span class="field-why">Χρειάζεται κυρίως για την αγγειακή και μεταβολική εικόνα.</span></div><input id="lab_ua" max="20" min="0" placeholder="π.χ. 5.0" step="0.1" type="number"/>
+</label>
+<label>ALT (U/L) 
+<div class="field-meta"><span class="field-badge badge-recommended">Συνιστώμενο</span><span class="field-why">Χρειάζεται κυρίως για την εικόνα του ήπατος.</span></div><input id="lab_alt" max="500" min="0" placeholder="π.χ. 25" step="1" type="number"/>
+</label>
+<label>AST (U/L) 
+<div class="field-meta"><span class="field-badge badge-recommended">Συνιστώμενο</span><span class="field-why">Χρειάζεται κυρίως για την εικόνα του ήπατος.</span></div><input id="lab_ast" max="500" min="0" placeholder="π.χ. 22" step="1" type="number"/>
+</label>
+<label>γ-GT / GGT (U/L) 
+<div class="field-meta"><span class="field-badge badge-recommended">Συνιστώμενο</span><span class="field-why">Χρειάζεται κυρίως για την εικόνα του ήπατος.</span></div><input id="lab_ggt" max="1000" min="0" placeholder="π.χ. 30" step="1" type="number"/>
+</label>
+</div>
+</fieldset>
+<div class="actions">
+<div class="req-status bad" id="reqStatus">Συμπλήρωσε τα υποχρεωτικά πεδία για να συνεχίσεις.</div>
+<button class="cta" id="continueBtn" type="submit">Συνέχεια</button>
+        <!-- Step 3 secondary action. Hidden by default; shown only on the lab step -->
+        <button class="secondary-cta" id="focusLabBtn" type="button" style="display:none;">Θέλω να προσθέσω κι άλλες εξετάσεις</button>
+</div>
+</form>
+<footer>
+<div>Αφού πατήσεις <span class="kbd">Συνέχεια</span>, θα ανοίξει το report με τα στοιχεία σου.</div>
+</footer>
+</div>
+<script>
+/* Safe helpers */
+const $ = (id) => document.getElementById(id);
+const num = (v) => (v === '' || v == null ? NaN : Number(v));
+const clamp = (x, a, b) => Math.max(a, Math.min(b, x));
+
+function calcAgeYears(dobStr){
+  if (!dobStr) return NaN;
+  const dob = new Date(dobStr + 'T00:00:00');
+  if (isNaN(dob)) return NaN;
+  const now = new Date();
+  let age = now.getFullYear() - dob.getFullYear();
+  const m = now.getMonth() - dob.getMonth();
+  if (m < 0 || (m === 0 && now.getDate() < dob.getDate())) age--;
+  return age;
+}
+
+function calcBMI(){
+  const h = num($('height').value);
+  const w = num($('weight').value);
+  if (!isFinite(h) || !isFinite(w) || h <= 0) {
+    $('bmiVal').textContent = '—';
+    return NaN;
+  }
+  const bmi = w / Math.pow(h / 100, 2);
+  $('bmiVal').textContent = bmi.toFixed(1);
+  return bmi;
+}
+
+function estimateWaist(){
+  const dob = $('dob').value;
+  const sex = $('sex').value;
+  const h = num($('height').value);
+  const w = num($('weight').value);
+  const bmi = calcBMI();
+  const age = calcAgeYears(dob);
+
+  if (![dob, sex].every(Boolean) || !isFinite(h) || !isFinite(w) || !isFinite(bmi) || !isFinite(age)) {
+    $('waist_est').textContent = '—';
+    $('waist_hint').innerHTML = 'Συμπλήρωσε <em>ημ. γέννησης</em>, <em>φύλο</em>, <em>ύψος</em> &amp; <em>βάρος</em> για να γίνει εκτίμηση.';
+    return NaN;
+  }
+
+  const sexCode = sex === 'male' ? 1 : 2;
+  let wc = 27.9302 + (-0.5616 * sexCode) + (0.1483 * age) + (1.1598 * bmi) + (0.3903 * w);
+  wc = clamp(wc, 45, 180);
+  $('waist_est').textContent = wc.toFixed(1);
+  $('waist_hint').textContent = 'Η πραγματική μέση προτιμάται. Αν λείπει, μπορεί να χρησιμοποιηθεί εκτίμηση από ύψος και βάρος.';
+  return wc;
+}
+
+function currentWaist(){
+  const wm = num($('waist_measured').value);
+  if (isFinite(wm)) return wm;
+  return estimateWaist();
+}
+
+function smokingTier(smoking){
+  if (smoking === 'current') return 'current';
+  if (smoking === 'former') return 'former';
+  if (smoking === 'never') return 'never';
+  return 'unknown';
+}
+
+function sleepBucket(v){
+  return v || 'unknown';
+}
+
+function mapAlcohol(freq){
+  switch(freq){
+    case 'weekly_plus': return { alcohol:'heavy', heavy_alcohol_flag:1 };
+    case 'monthly_1_3': return { alcohol:'moderate', heavy_alcohol_flag:0 };
+    case 'lt_monthly':  return { alcohol:'light', heavy_alcohol_flag:0 };
+    case 'never':       return { alcohol:'none', heavy_alcohol_flag:0 };
+    default:            return { alcohol:'unknown', heavy_alcohol_flag:0 };
+  }
+}
+
+function validateRequired(){
+  const reqIds = ['dob','sex','height','weight','lab_tc','lab_hdl','lab_tg','lab_glu','lab_neu'];
+  let ok = true;
+  reqIds.forEach(id => {
+    const el = $(id);
+    const filled = String(el.value || '').trim() !== '';
+    el.classList.toggle('invalid', !filled);
+    ok = ok && filled;
+  });
+  $('continueBtn').disabled = !ok;
+  const s = $('reqStatus');
+  if (ok) {
+    s.textContent = 'Έτοιμο — μπορείς να συνεχίσεις.';
+    s.className = 'req-status ok';
+  } else {
+    s.textContent = 'Συμπλήρωσε τα υποχρεωτικά πεδία για να συνεχίσεις.';
+    s.className = 'req-status bad';
+  }
+  return ok;
+}
+
+function buildPayload(){
+  const dob = $('dob').value || '';
+  const age = calcAgeYears(dob);
+  const sex = $('sex').value || '';
+  const height = num($('height').value);
+  const weight = num($('weight').value);
+  const bmi = calcBMI();
+  const waist = currentWaist();
+  const smoking = $('smoking').value || 'unknown';
+  const sleep = sleepBucket($('sleep_hours').value);
+  const pa = $('pa_sed_profile').value || 'unknown';
+  const alcoholFreq = $('alcohol_binge_freq').value || 'unknown';
+  const alcoholMap = mapAlcohol(alcoholFreq);
+  const lpaStatus = (document.querySelector('input[name="lpa_status"]:checked') || {}).value || 'unknown';
+
+  const answers = {
+    age: isFinite(age) ? age : null,
+    dob: dob || null,
+    sex: sex || null,
+    height: isFinite(height) ? height : null,
+    weight: isFinite(weight) ? weight : null,
+    bmi: isFinite(bmi) ? Number(bmi.toFixed(1)) : null,
+    waist: isFinite(waist) ? Number(waist.toFixed(1)) : null,
+    waist_measured: isFinite(num($('waist_measured').value)) ? Number(num($('waist_measured').value).toFixed(1)) : null,
+    waist_estimated: !isFinite(num($('waist_measured').value)) && isFinite(waist) ? Number(waist.toFixed(1)) : null,
+    htn: $('htn').value || 'unk',
+    dm_status: $('dm_status').value || 'unk',
+    heart_disease: $('heart_disease').value || 'unk',
+    fhx_cvd_early: $('fh_cvd').value || 'unk',
+    family_cvd: $('fh_cvd').value || 'unk',
+    lipid_meds: $('lipid_meds') ? ($('lipid_meds').value || 'unk') : 'unk',
+    antithrombotic: $('antithrombotic') ? ($('antithrombotic').value || 'unk') : 'unk',
+    psych_meds: $('psych_meds') ? ($('psych_meds').value || 'unk') : 'unk',
+    smoking,
+    smoking_tier: smokingTier(smoking),
+    pa_sedentary_profile: pa,
+    aerobic: $('aerobic') ? ($('aerobic').value || null) : null,
+    strength: $('strength') ? ($('strength').value || null) : null,
+    job_type: $('job_type') ? ($('job_type').value || null) : null,
+    shifts: $('shifts') ? ($('shifts').value || null) : null,
+    sleep,
+    sleep_hours: $('sleep_hours').value || null,
+    alcohol: alcoholMap.alcohol,
+    alcohol_binge_freq: alcoholFreq,
+    heavy_alcohol_flag: alcoholMap.heavy_alcohol_flag,
+    lpa: lpaStatus === 'high' ? 'high' : (lpaStatus === 'normal' ? 'normal' : 'unknown'),
+    lpa_status: lpaStatus,
+    lpa_mg_dl: null,
+
+    // labs (optional)
+    tc: isFinite(num($('lab_tc')?.value)) ? Number($('lab_tc').value) : null,
+    hdl: isFinite(num($('lab_hdl')?.value)) ? Number($('lab_hdl').value) : null,
+    tg: isFinite(num($('lab_tg')?.value)) ? Number($('lab_tg').value) : null,
+    sbp: isFinite(num($('lab_sbp')?.value)) ? Number($('lab_sbp').value) : null,
+    glu: isFinite(num($('lab_glu')?.value)) ? Number($('lab_glu').value) : null,
+    neu: isFinite(num($('lab_neu')?.value)) ? Number($('lab_neu').value) : null,
+    lym: isFinite(num($('lab_lym')?.value)) ? Number($('lab_lym').value) : null,
+    plt: isFinite(num($('lab_plt')?.value)) ? Number($('lab_plt').value) : null,
+    ua: isFinite(num($('lab_ua')?.value)) ? Number($('lab_ua').value) : null,
+    alt: isFinite(num($('lab_alt')?.value)) ? Number($('lab_alt').value) : null,
+    ast: isFinite(num($('lab_ast')?.value)) ? Number($('lab_ast').value) : null,
+    ggt: isFinite(num($('lab_ggt')?.value)) ? Number($('lab_ggt').value) : null,
+  };
+
+  const profile = {
+    age: answers.age,
+    dob: answers.dob,
+    sex: answers.sex,
+    height_cm: answers.height,
+    weight_kg: answers.weight,
+    bmi: answers.bmi,
+    waist_cm: answers.waist,
+    waist_measured_cm: answers.waist_measured,
+    waist_estimated_cm: answers.waist_estimated,
+    htn: answers.htn,
+    dm_status: answers.dm_status,
+    heart_disease: answers.heart_disease,
+    fhx_cvd_early: answers.fhx_cvd_early,
+    family_cvd: answers.family_cvd,
+    lipid_meds: answers.lipid_meds,
+    antithrombotic: answers.antithrombotic,
+    psych_meds: answers.psych_meds,
+    smoking: answers.smoking,
+    smoking_enc: answers.smoking_tier,
+    smoking_tier: answers.smoking_tier,
+    pa_sedentary_profile: answers.pa_sedentary_profile,
+    aerobic: answers.aerobic,
+    strength: answers.strength,
+    job_type: answers.job_type,
+    shifts: answers.shifts,
+    sleep: answers.sleep,
+    sleep_h: answers.sleep_hours,
+    sleep_hours: answers.sleep_hours,
+    alcohol: answers.alcohol,
+    alcohol_binge_freq: answers.alcohol_binge_freq,
+    heavy_alcohol_flag: answers.heavy_alcohol_flag,
+    lpa: answers.lpa,
+    lpa_status: answers.lpa_status,
+    lpa_mg_dl: answers.lpa_mg_dl,
+    tc: answers.tc,
+    hdl: answers.hdl,
+    tg: answers.tg,
+    sbp: answers.sbp,
+    glu: answers.glu,
+    neu: answers.neu,
+    lym: answers.lym,
+    plt: answers.plt,
+    ua: answers.ua,
+    alt: answers.alt,
+    ast: answers.ast,
+    ggt: answers.ggt,
+    pcos: null,
+    menopausal: null
+  };
+
+  return { answers, profile };
+}
+
+function saveAndGo(){
+  const { answers, profile } = buildPayload();
+  localStorage.setItem('alphalab_answers', JSON.stringify(answers));
+  localStorage.setItem('alphalab_profile', JSON.stringify(profile));
+  localStorage.setItem('al.profile', JSON.stringify(profile));
+  localStorage.setItem('al.answers', JSON.stringify(answers));
+  try {
+    const filename =
+      (document.querySelector('meta[name="al-report"]') || {}).content ||
+      'AlphaLab_v16j__SIMPLIFIED__P02M__CHIP_STACK_MODE_V1__HERO_FIXED_SUMMARY_V8__PASS_B_PATCHED.html';
+    window.location.href = filename;
+  } catch (e) {
+    window.location.href = 'AlphaLab_v16j__SIMPLIFIED__P02M__CHIP_STACK_MODE_V1__HERO_FIXED_SUMMARY_V8__PASS_B_PATCHED.html';
+  }
+}
+
+
+/* Visible test persona loader — always on for faster browser validation */
+const AL_TEST_PERSONAS = {
+  "GR-MARIA-22-ATH": {
+    birthDate: "2003-07-12", sex: "female", heightCm: 165, weightKg: 58, waistCm: 73,
+    htn: "no", dm_status: "none", heart_disease: "no", fh_cvd: "no", lpa_status: "unknown", smoking: "never", pa_sed_profile: "M_MVPA_MidSit", sleep_hours: "7to8", alcohol_binge_freq: "lt_monthly",
+    tc: 176, tg: 72, hdl: 68, glu: 85, sbp: null, neu: 3.2, lym: null, plt: null, ua: null, alt: null, ast: null, ggt: null,
+    notes: ["Athens 22F mobile-first", "Βασικός πυρήνας labs μόνο, χαμηλό φορτίο"]
+  },
+  "GR-GIANNIS-24-THESS": {
+    birthDate: "2001-11-03", sex: "male", heightCm: 178, weightKg: 81, waistCm: 92,
+    htn: "no", dm_status: "none", heart_disease: "no", fh_cvd: "no", lpa_status: "unknown", smoking: "current", pa_sed_profile: "L_MVPA_LowSit", sleep_hours: "5to6", alcohol_binge_freq: "monthly_1_3",
+    tc: 191, tg: 152, hdl: 41, glu: 92, sbp: null, neu: 4.1, lym: null, plt: null, ua: null, alt: null, ast: null, ggt: null,
+    notes: ["Thessaloniki 24M courier", "Βασικός πυρήνας labs μόνο, κάπνισμα και λίγο ύπνο"]
+  },
+  "GR-ELENI-27-PATRAS": {
+    birthDate: "1998-04-14", sex: "female", heightCm: 167, weightKg: 61, waistCm: 75,
+    htn: "no", dm_status: "none", heart_disease: "no", fh_cvd: "no", lpa_status: "normal", smoking: "never", pa_sed_profile: "M_MVPA_MidSit", sleep_hours: "7to8", alcohol_binge_freq: "lt_monthly",
+    tc: 182, tg: 79, hdl: 63, glu: 86, sbp: null, neu: 3.3, lym: null, plt: null, ua: null, alt: null, ast: null, ggt: null,
+    notes: ["Patra 27F βοηθός φαρμακείου", "Βασικός πυρήνας labs, κατά βάση καλή εικόνα"]
+  },
+  "GR-NIKOS-29-HER": {
+    birthDate: "1996-08-30", sex: "male", heightCm: 181, weightKg: 87, waistCm: 97,
+    htn: "no", dm_status: "none", heart_disease: "no", fh_cvd: "no", lpa_status: "unknown", smoking: "former", pa_sed_profile: "L_MVPA_MidHighSit", sleep_hours: "6to7", alcohol_binge_freq: "monthly_1_3",
+    tc: 201, tg: 178, hdl: 44, glu: 95, sbp: null, neu: 3.9, lym: null, plt: null, ua: null, alt: null, ast: null, ggt: null,
+    notes: ["Heraklion 29M shifts", "Βασικός πυρήνας labs με ήπια λιπιδαιμική επιβάρυνση"]
+  },
+  "GR-ANNA-31-ATH": {
+    birthDate: "1994-10-05", sex: "female", heightCm: 168, weightKg: 60, waistCm: 74,
+    htn: "no", dm_status: "none", heart_disease: "no", fh_cvd: "no", lpa_status: "normal", smoking: "never", pa_sed_profile: "H_MVPA_HighSit", sleep_hours: "7to8", alcohol_binge_freq: "lt_monthly",
+    tc: 176, tg: 82, hdl: 66, glu: 87, sbp: 112, neu: 3.4, lym: 2.1, plt: 228, ua: 4.2, alt: 18, ast: 19, ggt: 14,
+    notes: ["Athens 31F office/hybrid", "FULL low-burden baseline"]
+  },
+  "GR-KOSTAS-33-LAR": {
+    birthDate: "1992-07-19", sex: "male", heightCm: 177, weightKg: 84, waistCm: 94,
+    htn: "no", dm_status: "none", heart_disease: "no", fh_cvd: "no", lpa_status: "unknown", smoking: "current", pa_sed_profile: "L_MVPA_LowSit", sleep_hours: "6to7", alcohol_binge_freq: "lt_monthly",
+    tc: 198, tg: 154, hdl: 46, glu: 96, sbp: 126, neu: 3.8, lym: 2, plt: 236, ua: 5.5, alt: 28, ast: 24, ggt: 26,
+    notes: ["Larisa 33M electrician", "FULL mild borderline"]
+  },
+  "GR-DIMITRA-35-VOL": {
+    birthDate: "1990-02-18", sex: "female", heightCm: 163, weightKg: 76, waistCm: 91,
+    htn: "no", dm_status: "none", heart_disease: "no", fh_cvd: "yes", lpa_status: "unknown", smoking: "never", pa_sed_profile: "No_MVPA_HighSit", sleep_hours: "5to6", alcohol_binge_freq: "never",
+    tc: 198, tg: 146, hdl: 47, glu: 94, sbp: null, neu: 3.7, lym: null, plt: null, ua: null, alt: null, ast: null, ggt: null,
+    notes: ["Volos 35F admin + 2 παιδιά", "Βασικός πυρήνας labs με οικογενειακό CVD context"]
+  },
+  "GR-PANAGIOTIS-36-THESS": {
+    birthDate: "1989-03-27", sex: "male", heightCm: 175, weightKg: 96, waistCm: 108,
+    htn: "no", dm_status: "pre", heart_disease: "no", fh_cvd: "no", lpa_status: "unknown", smoking: "current", pa_sed_profile: "No_MVPA_HighSit", sleep_hours: "5to6", alcohol_binge_freq: "monthly_1_3",
+    tc: 208, tg: 224, hdl: 39, glu: 104, sbp: 132, neu: 4, lym: 1.9, plt: 245, ua: 6.3, alt: 42, ast: 31, ggt: 45,
+    notes: ["Thessaloniki 36M taxi", "FULL IR/MASLD leaning"]
+  },
+  "GR-CHRISTINA-38-IOA": {
+    birthDate: "1987-03-02", sex: "female", heightCm: 164, weightKg: 68, waistCm: 84,
+    htn: "no", dm_status: "none", heart_disease: "no", fh_cvd: "yes", lpa_status: "unknown", smoking: "never", pa_sed_profile: "M_MVPA_MidSit", sleep_hours: "7to8", alcohol_binge_freq: "never",
+    tc: 228, tg: 96, hdl: 70, glu: 88, sbp: null, neu: 3.5, lym: null, plt: null, ua: null, alt: null, ast: null, ggt: null,
+    notes: ["Ioannina 38F teacher", "Βασικός πυρήνας labs, κυρίως λιπιδαιμική εικόνα"]
+  },
+  "GR-STELIOS-39-PIR": {
+    birthDate: "1986-05-09", sex: "male", heightCm: 176, weightKg: 94, waistCm: 106,
+    htn: "unk", dm_status: "unk", heart_disease: "no", fh_cvd: "yes", lpa_status: "unknown", smoking: "current", pa_sed_profile: "L_MVPA_MidHighSit", sleep_hours: "lt5", alcohol_binge_freq: "weekly_plus",
+    tc: 214, tg: 206, hdl: 38, glu: 102, sbp: null, neu: 4.4, lym: null, plt: null, ua: null, alt: null, ast: null, ggt: null,
+    notes: ["Piraeus 39M restaurant manager", "Βασικός πυρήνας labs με έντονο στρες και λίγο ύπνο"]
+  },
+  "GR-IOANNA-41-ATH": {
+    birthDate: "1985-06-08", sex: "female", heightCm: 165, weightKg: 63, waistCm: 80,
+    htn: "no", dm_status: "none", heart_disease: "no", fh_cvd: "yes", lpa_status: "unknown", smoking: "never", pa_sed_profile: "M_MVPA_MidSit", sleep_hours: "7to8", alcohol_binge_freq: "lt_monthly",
+    tc: 242, tg: 92, hdl: 74, glu: 90, sbp: 116, neu: 3.4, lym: 2, plt: 240, ua: 4.3, alt: 19, ast: 19, ggt: 16,
+    notes: ["Athens 41F accountant", "FULL CVD/lipid context"]
+  },
+  "GR-MANOLIS-42-HER": {
+    birthDate: "1984-01-01", sex: "male", heightCm: 180, weightKg: 73, waistCm: 84,
+    htn: "no", dm_status: "none", heart_disease: "no", fh_cvd: "no", lpa_status: "unknown", smoking: "never", pa_sed_profile: "M_MVPA_MidSit", sleep_hours: "6to7", alcohol_binge_freq: "monthly_1_3",
+    tc: 188, tg: 165, hdl: 46, glu: 92, sbp: 118, neu: 3.5, lym: 2.1, plt: 220, ua: 5.4, alt: 48, ast: 31, ggt: 42,
+    notes: ["Heraklion 42M shop owner", "FULL lean MASLD stress test"]
+  },
+  "GR-SOFIA-44-PATRAS": {
+    birthDate: "1981-12-12", sex: "female", heightCm: 162, weightKg: 78, waistCm: 95,
+    htn: "no", dm_status: "pre", heart_disease: "no", fh_cvd: "no", lpa_status: "unknown", smoking: "former", pa_sed_profile: "Other_PA_Pattern", sleep_hours: "lt5", alcohol_binge_freq: "never",
+    tc: 202, tg: 182, hdl: 45, glu: 101, sbp: 128, neu: 4.6, lym: 1.6, plt: 285, ua: 5.7, alt: 30, ast: 24, ggt: 28,
+    notes: ["Patra 44F nurse", "FULL inflammatory / shift-work pattern"]
+  },
+  "GR-VASILIS-45-LAR": {
+    birthDate: "1980-01-25", sex: "male", heightCm: 179, weightKg: 89, waistCm: 101,
+    htn: "no", dm_status: "pre", heart_disease: "no", fh_cvd: "no", lpa_status: "unknown", smoking: "former", pa_sed_profile: "L_MVPA_MidHighSit", sleep_hours: "5to6", alcohol_binge_freq: "lt_monthly",
+    tc: 203, tg: 156, hdl: 43, glu: 99, sbp: 129, neu: 3.9, lym: null, plt: null, ua: null, alt: null, ast: null, ggt: null,
+    notes: ["Larisa 45M sales", "Βασικός πυρήνας labs, οριακή μεταβολική εικόνα"]
+  },
+  "GR-KATERINA-47-THESS": {
+    birthDate: "1978-09-17", sex: "female", heightCm: 161, weightKg: 82, waistCm: 99,
+    htn: "yes", dm_status: "pre", heart_disease: "no", fh_cvd: "yes", lpa_status: "high", smoking: "never", pa_sed_profile: "No_MVPA_HighSit", sleep_hours: "5to6", alcohol_binge_freq: "lt_monthly",
+    tc: 226, tg: 186, hdl: 48, glu: 109, sbp: 138, neu: 4.1, lym: 1.9, plt: 251, ua: 5.8, alt: 33, ast: 26, ggt: 31,
+    notes: ["Thessaloniki 47F bank employee", "FULL female cardiometabolic"]
+  },
+  "GR-DIMITRIS-49-ATH": {
+    birthDate: "1976-02-03", sex: "male", heightCm: 180, weightKg: 98, waistCm: 110,
+    htn: "yes", dm_status: "pre", heart_disease: "no", fh_cvd: "yes", lpa_status: "unknown", smoking: "former", pa_sed_profile: "L_MVPA_MidHighSit", sleep_hours: "5to6", alcohol_binge_freq: "monthly_1_3",
+    tc: 214, tg: 236, hdl: 40, glu: 112, sbp: 141, neu: 4, lym: 1.8, plt: 258, ua: 6.6, alt: 46, ast: 34, ggt: 49,
+    notes: ["Athens 49M engineer", "FULL classic pre-met"]
+  },
+  "GR-LINA-52-VOL": {
+    birthDate: "1973-06-11", sex: "female", heightCm: 160, weightKg: 79, waistCm: 97,
+    htn: "yes", dm_status: "pre", heart_disease: "no", fh_cvd: "yes", lpa_status: "unknown", smoking: "never", pa_sed_profile: "No_MVPA_HighSit", sleep_hours: "5to6", alcohol_binge_freq: "never",
+    tc: 209, tg: 171, hdl: 47, glu: 107, sbp: null, neu: 4.0, lym: null, plt: null, ua: null, alt: null, ast: null, ggt: null,
+    notes: ["Volos 52F supermarket cashier", "Βασικός πυρήνας labs με τάση προς ζάχαρο/τριγλυκερίδια"]
+  },
+  "GR-GIORGOS-54-KAL": {
+    birthDate: "1971-04-26", sex: "male", heightCm: 173, weightKg: 108, waistCm: 118,
+    htn: "yes", dm_status: "t2d", heart_disease: "yes", fh_cvd: "yes", lpa_status: "high", smoking: "current", pa_sed_profile: "No_MVPA_HighSit", sleep_hours: "lt5", alcohol_binge_freq: "weekly_plus",
+    tc: 248, tg: 298, hdl: 34, glu: 156, sbp: 149, neu: 5, lym: 1.4, plt: 312, ua: 7.1, alt: 58, ast: 41, ggt: 72,
+    notes: ["Kalamata 54M συνεργείο", "FULL high global burden"]
+  },
+  "GR-EIRINI-57-LAR": {
+    birthDate: "1968-01-01", sex: "female", heightCm: 164, weightKg: 61, waistCm: 82,
+    htn: "no", dm_status: "t2d", heart_disease: "no", fh_cvd: "no", lpa_status: "unknown", smoking: "never", pa_sed_profile: "M_MVPA_MidSit", sleep_hours: "6to7", alcohol_binge_freq: "lt_monthly",
+    tc: 191, tg: 108, hdl: 59, glu: 134, sbp: 122, neu: 3.7, lym: 1.9, plt: 229, ua: 4.7, alt: 21, ast: 20, ggt: 18,
+    notes: ["Larisa 57F school admin", "FULL lean T2D pattern"]
+  },
+  "GR-ANTONIS-60-THESS": {
+    birthDate: "1965-09-21", sex: "male", heightCm: 172, weightKg: 92, waistCm: 108,
+    htn: "yes", dm_status: "pre", heart_disease: "no", fh_cvd: "yes", lpa_status: "unknown", smoking: "former", pa_sed_profile: "No_MVPA_HighSit", sleep_hours: "6to7", alcohol_binge_freq: "lt_monthly",
+    tc: 212, tg: 188, hdl: 42, glu: 108, sbp: null, neu: 4.1, lym: null, plt: null, ua: null, alt: null, ast: null, ggt: null,
+    notes: ["Thessaloniki 60M semi-retired", "Βασικός πυρήνας labs με ηλικιακό και ιστορικό βάρος"]
+  }
+};
+
+const AL_TEST_PERSONA_SUMMARY = {
+  "GR-MARIA-22-ATH": "Νέα γυναίκα με τον βασικό πυρήνα εξετάσεων και χαμηλό φορτίο. Χρήσιμη για να δεις αν το report μένει καθαρό και ήρεμο σε κατά βάση καλή εικόνα.",
+  "GR-GIANNIS-24-THESS": "Νεαρός άνδρας με βασικό πυρήνα εξετάσεων, κάπνισμα και λίγο ύπνο. Ελέγχει αν το report ξεχωρίζει σωστά τη συμπεριφορική επιβάρυνση από την εργαστηριακή εικόνα.",
+  "GR-ELENI-27-PATRAS": "Νέα γυναίκα με βασικό πυρήνα εξετάσεων και κατά βάση καλή εικόνα. Χρήσιμη για να φανεί αν το app δίνει ήρεμο και σαφές report όταν τα δεδομένα είναι αρκετά αλλά όχι πλήρη.",
+  "GR-NIKOS-29-HER": "Νεαρός άνδρας με βασικό πυρήνα εξετάσεων και ήπια μεταβολική επιβάρυνση. Χρήσιμος για σενάριο με τα απαραίτητα labs αλλά όχι πλήρη φάκελο.",
+  "GR-ANNA-31-ATH": "Γυναίκα με πλήρες βασικό σετ και ήπια συνολική εικόνα. Καλό σημείο αναφοράς για ένα ήρεμο, καθαρό report.",
+  "GR-KOSTAS-33-LAR": "Άνδρας με πλήρεις βασικές εξετάσεις και οριακή επιβάρυνση. Χρήσιμος για να δεις πώς αποδίδονται τα πρώιμα ευρήματα χωρίς υπερβολή.",
+  "GR-DIMITRA-35-VOL": "Γυναίκα με βασικό πυρήνα εξετάσεων, αυξημένη περίμετρο μέσης και οικογενειακό ιστορικό. Ελέγχει αν το report δίνει σωστό context χωρίς να υπερβάλλει.",
+  "GR-PANAGIOTIS-36-THESS": "Άνδρας με πλήρες σετ και εικόνα αντίστασης στην ινσουλίνη με πιθανή ηπατική συμμετοχή. Χρήσιμος για πιο φορτισμένο μεταβολικό report.",
+  "GR-CHRISTINA-38-IOA": "Γυναίκα με βασικό πυρήνα εξετάσεων και κυρίως λιπιδαιμικό ενδιαφέρον. Ελέγχει αν το app δεν μπερδεύει τη χοληστερίνη με γενικευμένο μεταβολικό φορτίο.",
+  "GR-STELIOS-39-PIR": "Άνδρας με βασικό πυρήνα εξετάσεων, έντονο στρες και λίγο ύπνο. Χρήσιμος για να δεις τον τόνο του report όταν συνυπάρχουν συμπεριφορικός και εργαστηριακός κίνδυνος.",
+  "GR-IOANNA-41-ATH": "Γυναίκα με πλήρη δεδομένα και κυρίως λιπιδαιμικό/καρδιαγγειακό ενδιαφέρον. Καλό σενάριο για να ελέγξεις την εξήγηση της χοληστερίνης.",
+  "GR-MANOLIS-42-HER": "Άνδρας χωρίς παχυσαρκία αλλά με ηπατικά ευρήματα. Χρήσιμος για να ελέγξεις αν το report εξηγεί σωστά ότι η ηπατική επιβάρυνση δεν απαιτεί πάντα μεγάλη αύξηση βάρους.",
+  "GR-SOFIA-44-PATRAS": "Γυναίκα με πλήρες σετ, βάρδιες και φλεγμονώδη επιβάρυνση. Ελέγχει αν η γλώσσα μένει κατανοητή σε πιο σύνθετη εικόνα.",
+  "GR-VASILIS-45-LAR": "Άνδρας με βασικό πυρήνα εξετάσεων και οριακή μεταβολική εικόνα. Καλός για έλεγχο ενδιάμεσου σεναρίου χωρίς πλήρη πρόσθετα δεδομένα.",
+  "GR-KATERINA-47-THESS": "Γυναίκα με πλήρεις εξετάσεις και καθαρό καρδιομεταβολικό φορτίο. Ελέγχει την απόδοση πίεσης, λιπιδίων και σακχάρου μαζί.",
+  "GR-DIMITRIS-49-ATH": "Άνδρας με τυπική προμεταβολική εικόνα και κεντρική παχυσαρκία. Χρήσιμος για να δεις αν το report ιεραρχεί σωστά τα ευρήματα.",
+  "GR-LINA-52-VOL": "Γυναίκα με βασικό πυρήνα εξετάσεων και τάση προς ζάχαρο και τριγλυκερίδια. Καλό σενάριο για ουσιαστικά αλλά όχι πλήρη δεδομένα.",
+  "GR-GIORGOS-54-KAL": "Άνδρας με πλήρες σετ και υψηλό συνολικό φορτίο. Χρήσιμος για να ελέγξεις αν το report μένει σαφές και ψύχραιμο σε βαριά εικόνα.",
+  "GR-EIRINI-57-LAR": "Γυναίκα με σακχαρικό προφίλ χωρίς εμφανή παχυσαρκία. Χρήσιμος έλεγχος για πιο λεπτές μεταβολικές περιπτώσεις.",
+  "GR-ANTONIS-60-THESS": "Άνδρας με βασικό πυρήνα εξετάσεων, ηλικιακό και ιστορικό βάρος. Ελέγχει αν το app παραμένει χρήσιμο όταν υπάρχουν τα απαραίτητα αλλά λείπουν αρκετά συνιστώμενα στοιχεία."
+};
+
+function alStatus(msg){
+  const el = $('al-test-persona-status');
+  if (el) el.textContent = msg;
+}
+
+function alSetTextInput(id, value){
+  const el = $(id);
+  if (!el) return false;
+  el.value = value == null ? '' : String(value);
+  el.dispatchEvent(new Event('input', { bubbles:true }));
+  el.dispatchEvent(new Event('change', { bubbles:true }));
+  return String(el.value || '') === String(value == null ? '' : value);
+}
+
+const AL_SELECT_ALIASES = {
+  alcohol_binge_freq: {
+    '1_3_month': 'monthly_1_3',
+    'monthly': 'monthly_1_3',
+    '1_3_week': 'weekly_plus',
+    'weekly': 'weekly_plus',
+    'weekly_1_plus': 'weekly_plus'
+  },
+  sleep_hours: {
+    'lessthan6': '5to6',
+    'morethan8': 'gt8'
+  }
+};
+
+function alResolveSelectValue(id, value){
+  const raw = value == null ? '' : String(value);
+  const aliases = AL_SELECT_ALIASES[id] || {};
+  return aliases[raw] || raw;
+}
+
+function alSetSelect(id, value){
+  const el = $(id);
+  if (!el) return false;
+  const resolved = alResolveSelectValue(id, value);
+  el.value = resolved;
+  el.dispatchEvent(new Event('input', { bubbles:true }));
+  el.dispatchEvent(new Event('change', { bubbles:true }));
+  return String(el.value || '') === String(resolved || '');
+}
+
+function alSetRadio(name, value){
+  const el = document.querySelector('input[name="' + name + '"][value="' + value + '"]');
+  if (!el) return false;
+  el.checked = true;
+  el.dispatchEvent(new Event('change', { bubbles:true }));
+  return !!document.querySelector('input[name="' + name + '"]:checked');
+}
+
+function alCollectLoaderMissing(){
+  const reqIds = ['dob','sex','height','weight','lab_tc','lab_hdl','lab_tg','lab_glu','lab_neu'];
+  const missing = [];
+  reqIds.forEach(id => {
+    const el = $(id);
+    if (!el){ missing.push(id + ':missing-control'); return; }
+    const ok = (typeof el.checkValidity === 'function') ? el.checkValidity() : (String(el.value || '').trim() !== '');
+    el.classList.toggle('invalid', !ok);
+    if (!ok) missing.push(id);
+  });
+  return missing;
+}
+
+function alValidateFilledPersona(key, unresolved){
+  validateRequired();
+  const missing = alCollectLoaderMissing();
+  const problems = [];
+  if (Array.isArray(unresolved) && unresolved.length) problems.push('unresolved=' + unresolved.join(', '));
+  if (missing.length) problems.push('missing required=' + missing.join(', '));
+  if (problems.length){
+    alStatus('Το προφίλ φορτώθηκε με θέματα: ' + problems.join(' | '));
+    return false;
+  }
+  const noteText = Array.isArray(AL_TEST_PERSONAS[key]?.notes) && AL_TEST_PERSONAS[key].notes.length ? ' Σημείωση: ' + AL_TEST_PERSONAS[key].notes.join(' | ') : '';
+  alStatus('Το προφίλ φορτώθηκε.' + noteText);
+  return true;
+}
+
+function alUpdatePersonaDescription(){
+  const key = $('al-test-persona-select')?.value || '';
+  const el = $('al-test-persona-desc');
+  if (!el) return;
+  el.textContent = key && AL_TEST_PERSONA_SUMMARY[key]
+    ? AL_TEST_PERSONA_SUMMARY[key]
+    : 'Επίλεξε ένα προφίλ για να δεις σύντομη ιατρική περιγραφή.';
+}
+
+function alFillPersona(key){
+  const p = AL_TEST_PERSONAS[key];
+  if (!p){ alStatus('Επίλεξε πρώτα ένα προφίλ.'); return false; }
+
+  const unresolved = [];
+  function must(ok, name){ if (!ok) unresolved.push(name); }
+
+  must(alSetTextInput('dob', p.birthDate), 'dob');
+  must(alSetSelect('sex', p.sex), 'sex');
+  must(alSetTextInput('height', p.heightCm), 'height');
+  must(alSetTextInput('weight', p.weightKg), 'weight');
+  must(alSetTextInput('waist_measured', p.waistCm), 'waist_measured');
+  must(alSetSelect('htn', p.htn), 'htn');
+  must(alSetSelect('dm_status', p.dm_status), 'dm_status');
+  must(alSetSelect('heart_disease', p.heart_disease), 'heart_disease');
+  must(alSetSelect('fh_cvd', p.fh_cvd), 'fh_cvd');
+  must(alSetRadio('lpa_status', p.lpa_status), 'lpa_status');
+  must(alSetSelect('smoking', p.smoking), 'smoking');
+  must(alSetSelect('pa_sed_profile', p.pa_sed_profile), 'pa_sed_profile');
+  must(alSetSelect('sleep_hours', p.sleep_hours), 'sleep_hours');
+  must(alSetSelect('alcohol_binge_freq', p.alcohol_binge_freq), 'alcohol_binge_freq');
+
+  must(alSetTextInput('lab_tc', p.tc), 'lab_tc');
+  must(alSetTextInput('lab_tg', p.tg), 'lab_tg');
+  must(alSetTextInput('lab_hdl', p.hdl), 'lab_hdl');
+  must(alSetTextInput('lab_glu', p.glu), 'lab_glu');
+  must(alSetTextInput('lab_sbp', p.sbp), 'lab_sbp');
+  must(alSetTextInput('lab_neu', p.neu), 'lab_neu');
+  must(alSetTextInput('lab_lym', p.lym), 'lab_lym');
+  must(alSetTextInput('lab_plt', p.plt), 'lab_plt');
+  must(alSetTextInput('lab_ua', p.ua), 'lab_ua');
+  must(alSetTextInput('lab_alt', p.alt), 'lab_alt');
+  must(alSetTextInput('lab_ast', p.ast), 'lab_ast');
+  must(alSetTextInput('lab_ggt', p.ggt), 'lab_ggt');
+
+  calcBMI();
+  estimateWaist();
+  return alValidateFilledPersona(key, unresolved);
+}
+
+/* events */
+['dob','sex','height','weight','waist_measured','smoking','pa_sed_profile','sleep_hours','alcohol_binge_freq','lab_tc','lab_hdl','lab_tg','lab_sbp','lab_glu','lab_neu','lab_lym','lab_plt','lab_ua','lab_alt','lab_ast','lab_ggt'].forEach(id => {
+  const el = $(id);
+  if (!el) return;
+  el.addEventListener('input', () => { calcBMI(); estimateWaist(); validateRequired(); });
+  el.addEventListener('change', () => { calcBMI(); estimateWaist(); validateRequired(); });
+});
+
+
+$('al-test-persona-select')?.addEventListener('change', alUpdatePersonaDescription);
+alUpdatePersonaDescription();
+
+$('al-fill-persona-btn')?.addEventListener('click', () => {
+  const key = $('al-test-persona-select')?.value || '';
+  alFillPersona(key);
+});
+
+$('al-fill-and-continue-btn')?.addEventListener('click', () => {
+  const key = $('al-test-persona-select')?.value || '';
+  if (!alFillPersona(key)) {
+    const form = $('onboardingForm');
+    if (form && typeof form.reportValidity === 'function') form.reportValidity();
+    return;
+  }
+  setTimeout(() => {
+    calcBMI();
+    estimateWaist();
+    const ok = validateRequired() && alCollectLoaderMissing().length === 0;
+    if (!ok) {
+      const form = $('onboardingForm');
+      if (form && typeof form.reportValidity === 'function') form.reportValidity();
+      return;
+    }
+    saveAndGo();
+  }, 80);
+});
+
+$('bpQuickBtn')?.addEventListener('click', () => {
+  const box = $('bpQuickHelp');
+  const open = box.hasAttribute('hidden');
+  if (open) box.removeAttribute('hidden'); else box.setAttribute('hidden','');
+  $('bpQuickBtn').setAttribute('aria-expanded', String(open));
+});
+
+document.querySelectorAll('input[name="lpa_status"]').forEach(r => {
+  r.addEventListener('change', validateRequired);
+});
+
+$('onboardingForm').addEventListener('submit', (e) => {
+  e.preventDefault();
+  calcBMI();
+  estimateWaist();
+  if (!validateRequired()) return;
+  saveAndGo();
+});
+
+/* init */
+calcBMI();
+estimateWaist();
+validateRequired();
+</script>
+
+<!-- 3‑step controller and validation logic -->
+<script>
+// Step titles used for the top bar. These mirror the Greek titles shown in the design.
+const STEP_TITLES = {
+  1: 'Ξεκινά η εικόνα σου',
+  2: 'Κάν’ το πιο προσωπικό',
+  3: 'Ξεκλείδωσε πιο πλήρες report'
+};
+
+// Validate only the essential fields for the first onboarding step.  Returns true when all
+// of the required controls (sex, height, weight) are non‑blank.  Also applies the
+// `invalid` class to any empty controls so the user can see what needs to be filled.
+function validateStep1(){
+  const ids = ['dob','sex','height','weight'];
+  let ok = true;
+  ids.forEach(id => {
+    const el = $(id);
+    const filled = String((el && el.value) || '').trim() !== '';
+    if (el) el.classList.toggle('invalid', !filled);
+    ok = ok && filled;
+  });
+  return ok;
+}
+
+// Validate only the lifestyle fields for the second onboarding step.  Returns true
+// when smoking, physical activity profile, sleep hours and alcohol binge frequency
+// are selected.  Missing fields are highlighted via the `invalid` class.
+function validateStep2(){
+  const ids = [];
+  let ok = true;
+  ids.forEach(id => {
+    const el = $(id);
+    const filled = String((el && el.value) || '').trim() !== '';
+    if (el) el.classList.toggle('invalid', !filled);
+    ok = ok && filled;
+  });
+  return ok;
+}
+
+// Focus the first empty recommended lab input in Step 3. This helper scans through
+// the predefined lab order and focuses the first one without a value. It does not
+// mutate any payload or block report access.
+function focusFirstEmptyLab(){
+  const labOrder = ['lab_tc','lab_hdl','lab_tg','lab_sbp','lab_glu','lab_neu','lab_lym','lab_plt','lab_ua','lab_alt','lab_ast','lab_ggt'];
+  for (let i = 0; i < labOrder.length; i++){
+    const id = labOrder[i];
+    const el = document.getElementById(id);
+    if (el && String(el.value || '').trim() === ''){
+      el.focus();
+      return;
+    }
+  }
+}
+
+// Change the current onboarding step.  This updates the root state attribute,
+// shows the appropriate step panel, and synchronises the top and bottom bars.  The
+// step number is clamped between 1 and 3 to avoid invalid states.
+function goToOnbStep(step){
+  const shell = document.getElementById('alOnbShell');
+  if (!shell) return;
+  const newStep = Math.max(1, Math.min(3, parseInt(step, 10)));
+  shell.setAttribute('data-step', String(newStep));
+  // Show only the selected panel
+  const panels = document.querySelectorAll('#alOnbShell .alOnbStep');
+  panels.forEach((panel, idx) => {
+    panel.style.display = (idx === newStep - 1) ? '' : 'none';
+  });
+  syncTopBar();
+  syncBottomBar();
+  // When entering step 3, ensure the reward meter is updated
+  if (newStep === 3) {
+    syncRewardMeter();
+  }
+}
+
+// Synchronise any global top bar or progress indicators.  For this early
+// implementation there is no separate persistent top bar outside of each step,
+// but this function is defined for future extensions.  It currently updates
+// the document title using the step titles map to reflect progress.
+function syncTopBar(){
+  try{
+    const shell = document.getElementById('alOnbShell');
+    const step = parseInt(shell?.getAttribute('data-step') || '1', 10);
+    const title = STEP_TITLES[step] || '';
+    if (title) {
+      document.title = 'AlphaLab • ' + title;
+      // Update the new persistent top bar with current step counter and title
+      const counterEl = document.getElementById('alOnbStepCounter');
+      const titleEl = document.getElementById('alOnbStepTitle');
+      const total = Object.keys(STEP_TITLES).length || 3;
+      if (counterEl) counterEl.textContent = step + '/' + total;
+      if (titleEl) titleEl.textContent = title;
+    }
+  }catch(_){ /* no-op */ }
+}
+
+// Update the bottom bar UI and call the correct validation routine based on
+// current step.  This function adjusts the primary CTA text, enables or
+// disables the button, and updates the requirement status hint.  It does not
+// modify the payload or change any data model.
+function syncBottomBar(){
+  const shell = document.getElementById('alOnbShell');
+  if (!shell) return;
+  const step = parseInt(shell.getAttribute('data-step') || '1', 10);
+  const btn = document.getElementById('continueBtn');
+  const statusEl = document.getElementById('reqStatus');
+  let ok = true;
+  if (step === 1) {
+    ok = validateStep1();
+    if (btn) btn.textContent = 'Επόμενο';
+    if (statusEl) {
+      if (ok) {
+        statusEl.textContent = 'Έτοιμο — μπορείς να συνεχίσεις.';
+        statusEl.className = 'req-status ok';
+      } else {
+        statusEl.textContent = 'Συμπλήρωσε τα βασικά απαραίτητα πεδία για να συνεχίσεις.';
+        statusEl.className = 'req-status bad';
+      }
+    }
+  } else if (step === 2) {
+    ok = validateStep2();
+    if (btn) btn.textContent = 'Επόμενο';
+    if (statusEl) {
+      if (ok) {
+        statusEl.textContent = 'Έτοιμο — μπορείς να συνεχίσεις.';
+        statusEl.className = 'req-status ok';
+      } else {
+        statusEl.textContent = 'Όλα τα πεδία αυτού του βήματος είναι προαιρετικά — μπορείς να συνεχίσεις.';
+        statusEl.className = 'req-status bad';
+      }
+    }
+  } else {
+    // Step 3: reuse original validation for all required fields and update button text
+    ok = validateRequired();
+    if (btn) btn.textContent = 'Δες το report μου τώρα';
+  }
+  // Disable or enable the button based on validity
+  if (btn) btn.disabled = !ok;
+  // Show or hide the secondary action button based on the current step
+  const secBtn = document.getElementById('focusLabBtn');
+  if (secBtn){
+    if (step === 3){
+      secBtn.style.display = '';
+    } else {
+      secBtn.style.display = 'none';
+    }
+  }
+}
+
+// Compute the reward meter state based on optional lab inputs.  This function
+// only updates the UI and never blocks access to the report.  It considers
+// whether the user has provided any of the core, inflammatory, or extra labs.
+function syncRewardMeter(){
+  const hasValue = (id) => {
+    const el = $(id);
+    return el && String(el.value || '').trim() !== '';
+  };
+  const requiredLabs = ['lab_tc','lab_hdl','lab_tg','lab_glu','lab_neu'];
+  const vascularLabs = ['lab_sbp'];
+  const inflamMore = ['lab_lym','lab_plt'];
+  const extraLabs = ['lab_ua','lab_alt','lab_ast','lab_ggt'];
+  const reqReady = requiredLabs.every(hasValue);
+  const vascularPresent = vascularLabs.some(hasValue);
+  const inflamMorePresent = inflamMore.some(hasValue);
+  const extraPresent = extraLabs.some(hasValue);
+  let meter = '';
+  let hint = '';
+  if (!reqReady) {
+    meter = 'Λείπουν βασικές εξετάσεις';
+    hint = 'Συμπλήρωσε πρώτα τα απαραίτητα εργαστηριακά πεδία για να συνεχίσεις.';
+  } else if (reqReady && !vascularPresent && !inflamMorePresent && !extraPresent) {
+    meter = 'Βασική εργαστηριακή εικόνα';
+    hint = 'Έχεις τη βασική εικόνα σακχάρου, λιπιδίων και φλεγμονής.';
+  } else if (reqReady && vascularPresent && !inflamMorePresent && !extraPresent) {
+    meter = 'Πιο πλήρης εικόνα';
+    hint = 'Με την πίεση βελτιώνεται και η αγγειακή ηλικία.';
+  } else if (reqReady && !vascularPresent && (inflamMorePresent || extraPresent)) {
+    meter = 'Πιο προσωπική εικόνα';
+    hint = 'Έχεις επιπλέον φλεγμονώδη ή ηπατική λεπτομέρεια, αλλά λείπει ακόμη η πίεση για την αγγειακή ηλικία.';
+  } else {
+    meter = 'Πιο πλήρες report';
+    hint = 'Έχεις πιο πλούσια αγγειακή, φλεγμονώδη και ηπατική εικόνα.';
+  }
+  const meterEl = document.getElementById('alOnbRewardMeter');
+  const hintEl = document.getElementById('alOnbRewardHint');
+  if (meterEl) meterEl.textContent = meter;
+  if (hintEl) hintEl.textContent = hint;
+}
+
+// Once the page is ready, wire up the step controller and event listeners.  We
+// convert the submit button into a simple button to prevent premature form
+// submission and attach a click handler that moves between steps or triggers
+// the final save.  Input change listeners update the CTA state and reward
+// meter in real time.
+document.addEventListener('DOMContentLoaded', function(){
+  // initialise to first step if not already set
+  goToOnbStep(parseInt(document.getElementById('alOnbShell')?.getAttribute('data-step') || '1', 10));
+  const btn = document.getElementById('continueBtn');
+  if (btn) {
+    // ensure the button does not submit the form automatically
+    btn.setAttribute('type','button');
+    btn.addEventListener('click', function(ev){
+      ev.preventDefault();
+      const shell = document.getElementById('alOnbShell');
+      const step = parseInt(shell?.getAttribute('data-step') || '1', 10);
+      /*
+       * When moving between onboarding steps, perform validation to highlight
+       * missing fields but do not block progression to the next step.  This
+       * addresses a bug where step 1 would remain blocked even when the visible
+       * required fields were filled.  By always advancing the step, users
+       * completing the form manually can proceed without being trapped by
+       * hidden or stale validation state.  Final payload validation still
+       * occurs at step 3 before saving and navigating to the report.
+       */
+      if (step === 1) {
+        // Highlight any missing fields in step 1 but always proceed to step 2
+        validateStep1();
+        goToOnbStep(2);
+        shell.scrollIntoView({ behavior:'smooth', block:'start' });
+        // update the bottom bar for the new step
+        syncBottomBar();
+        return;
+      }
+      if (step === 2) {
+        // Highlight missing lifestyle fields but proceed to step 3
+        validateStep2();
+        goToOnbStep(3);
+        shell.scrollIntoView({ behavior:'smooth', block:'start' });
+        syncBottomBar();
+        return;
+      }
+      // Step 3: validate all required fields before saving
+      calcBMI();
+      estimateWaist();
+      if (validateRequired()) {
+        saveAndGo();
+      } else {
+        // ensure the UI reflects missing required fields
+        syncBottomBar();
+      }
+    });
+  }
+  // Listen for changes on the fields that influence gating and reward metre
+  const gatingIds = ['dob','sex','height','weight'];
+  gatingIds.forEach(id => {
+    const el = $(id);
+    if (el) {
+      // When the user edits a gating field, update the bottom bar state and
+      // automatically advance to the next onboarding step when all required
+      // fields for the current step are filled.  This auto‑advance logic
+      // prevents users from getting stuck on step 1 or 2 when the Continue
+      // button fails to respond due to hidden or stale validation state.
+      const handleAutoAdvance = () => {
+        syncBottomBar();
+        const shell = document.getElementById('alOnbShell');
+        const currentStep = parseInt(shell?.getAttribute('data-step') || '1', 10);
+        if (currentStep === 1 && validateStep1()) {
+          goToOnbStep(2);
+          shell.scrollIntoView({ behavior:'smooth', block:'start' });
+          syncBottomBar();
+        }
+      };
+      el.addEventListener('input', handleAutoAdvance);
+      el.addEventListener('change', handleAutoAdvance);
+    }
+  });
+  // Lab inputs update the reward meter as the user types
+  const labIds = ['lab_tc','lab_hdl','lab_tg','lab_sbp','lab_glu','lab_neu','lab_lym','lab_plt','lab_ua','lab_alt','lab_ast','lab_ggt'];
+  labIds.forEach(id => {
+    const el = $(id);
+    if (el) {
+      el.addEventListener('input', syncRewardMeter);
+      el.addEventListener('change', syncRewardMeter);
+    }
+  });
+  // Run once on load
+  syncBottomBar();
+  syncRewardMeter();
+
+  // Attach click listener for the step 3 secondary CTA.  When invoked,
+  // it focuses the first empty lab input on the labs step without
+  // affecting the payload or gating.
+  const secBtn = document.getElementById('focusLabBtn');
+  if (secBtn){
+    secBtn.addEventListener('click', function(ev){
+      ev.preventDefault();
+      focusFirstEmptyLab();
+    });
+  }
+});
+</script>
+<script>
+/* QA compatibility helper objects */
+(function(){
+  try{
+    const rawA = localStorage.getItem('alphalab_answers');
+    const rawP = localStorage.getItem('alphalab_profile');
+    window.__AL_LAST_TRANSPORT_PAYLOAD__ = rawA ? JSON.parse(rawA) : null;
+    window.__AL_PROFILE__ = rawP ? JSON.parse(rawP) : null;
+    window.__AL_V20_CANONICAL_PROFILE__ = window.__AL_PROFILE__;
+    window.__AL_TRANSPORT_DEBUG__ = {
+      answersPresent: !!rawA,
+      profilePresent: !!rawP,
+      source: 'onboarding'
+    };
+  }catch(_){ }
+})();
+</script>
+<script>
+// Dynamic DOM rearrangement for the 3‑step onboarding shell
+document.addEventListener('DOMContentLoaded', function(){
+  // Step 1: move basic fields and why
+  const step1Fields = document.getElementById('alOnbStep1Fields');
+  const basicFieldset = document.querySelector('fieldset.tone-1');
+  if (step1Fields && basicFieldset) {
+    step1Fields.appendChild(basicFieldset);
+  }
+  const step1Why = document.getElementById('alOnbStep1Why');
+  const originalWhy = document.querySelector('fieldset.tone-1 + .why');
+  if (step1Why && originalWhy) {
+    step1Why.appendChild(originalWhy);
+  }
+  // Move the existing actions (continue button) into the new bottom bar
+  const bottomBar = document.getElementById('alOnbBottomBar');
+  const actions = document.querySelector('div.actions');
+  if (bottomBar && actions) {
+    bottomBar.appendChild(actions);
+  }
+  // Hide the old footer to prevent duplicate instructions
+  const footer = document.querySelector('footer');
+  if (footer) {
+    footer.style.display = 'none';
+  }
+  // Step 2: lifestyle section — move tone‑5 fieldsets except labs and tone‑6 alcohol
+  const lifestyleContainer = document.getElementById('alOnbSectionLifestyle');
+  document.querySelectorAll('fieldset.tone-5').forEach(fs => {
+    if (fs.id !== 'labsSection' && lifestyleContainer) {
+      lifestyleContainer.appendChild(fs);
+    }
+  });
+  const alcoholFieldset = document.querySelector('fieldset.tone-6');
+  if (alcoholFieldset && lifestyleContainer) {
+    lifestyleContainer.appendChild(alcoholFieldset);
+  }
+  // Step 2: history and cardio sections
+  const historyContainer = document.getElementById('alOnbSectionHistory');
+  const historyFieldset = document.querySelector('fieldset.tone-2');
+  if (historyFieldset && historyContainer) {
+    historyContainer.appendChild(historyFieldset);
+  }
+  const cardioContainer = document.getElementById('alOnbSectionCardio');
+  const cardioFieldset = document.querySelector('fieldset.tone-3');
+  if (cardioFieldset && cardioContainer) {
+    cardioContainer.appendChild(cardioFieldset);
+  }
+  // Step 3: distribute lab inputs into core, inflammation and extra sections
+  const labsFieldset = document.getElementById('labsSection');
+  if (labsFieldset) {
+    const core = document.getElementById('alOnbLabsCore');
+    const inflam = document.getElementById('alOnbLabsInflammation');
+    const extra = document.getElementById('alOnbLabsExtra');
+    const moveInputs = (ids, container) => {
+      ids.forEach(id => {
+        const input = document.getElementById(id);
+        if (input && container) {
+          const label = input.closest('label');
+          if (label) {
+            container.appendChild(label);
+          }
+        }
+      });
+    };
+    moveInputs(['lab_tc','lab_hdl','lab_tg','lab_sbp','lab_glu'], core);
+    moveInputs(['lab_neu','lab_lym','lab_plt'], inflam);
+    moveInputs(['lab_ua','lab_alt','lab_ast','lab_ggt'], extra);
+    // remove the now-empty labs fieldset to avoid duplication
+    if (labsFieldset.parentNode) {
+      labsFieldset.parentNode.removeChild(labsFieldset);
+    }
+  }
+  // Hide any remaining fieldsets not moved into the shell
+  const shell = document.getElementById('alOnbShell');
+  document.querySelectorAll('#onboardingForm > fieldset').forEach(fs => {
+    if (!shell.contains(fs)) {
+      fs.style.display = 'none';
+    }
+  });
+});
+</script>
+</body>
+</html>
