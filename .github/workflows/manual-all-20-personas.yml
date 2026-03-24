@@ -1,0 +1,119 @@
+name: manual-all-20-personas
+
+on:
+  workflow_dispatch:
+    inputs:
+      browser:
+        description: Browser to use
+        required: true
+        default: chromium
+        type: choice
+        options:
+          - chromium
+          - firefox
+          - webkit
+
+permissions:
+  contents: read
+
+concurrency:
+  group: manual-all-20-personas-${{ inputs.browser }}
+  cancel-in-progress: false
+
+jobs:
+  all-20-personas:
+    name: All 20 personas — ${{ inputs.browser }}
+    runs-on: ubuntu-latest
+    env:
+      CI: true
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browser
+        run: npx playwright install --with-deps ${{ inputs.browser }}
+
+      - name: Generate all-20 personas spec
+        shell: bash
+        run: |
+          mkdir -p tests/generated
+          cat > tests/generated/all-20-personas.generated.spec.ts <<'EOF'
+          import { test, expect } from '@playwright/test';
+          import { personas } from '../config/personas';
+          import { REPORT_URL } from '../config/targets';
+          import { openOnboarding, fillAndContinue } from '../helpers/onboarding';
+          import { waitForStableReport, verifyCriticalNodes, captureSignature } from '../helpers/reportSignature';
+
+          const expectedReportFile = REPORT_URL.split('/').pop() || 'AlphaLab';
+
+          for (const persona of personas) {
+            test(`all-personas :: ${persona.code}`, async ({ page }) => {
+              const pageErrors: string[] = [];
+
+              page.on('pageerror', err => pageErrors.push(String(err)));
+              page.on('console', msg => {
+                if (msg.type() === 'error') pageErrors.push(msg.text());
+              });
+
+              await openOnboarding(page);
+              await fillAndContinue(page, persona.code);
+
+              await waitForStableReport(page, 12000, 500);
+              await verifyCriticalNodes(page);
+
+              expect(page.url()).toContain(expectedReportFile);
+
+              const storageState = await page.evaluate(() => ({
+                alphalab_profile: !!localStorage.getItem('alphalab_profile'),
+                alphalab_answers: !!localStorage.getItem('alphalab_answers'),
+                al_profile: !!localStorage.getItem('al.profile'),
+                al_answers: !!localStorage.getItem('al.answers')
+              }));
+
+              expect(storageState.alphalab_profile).toBeTruthy();
+              expect(storageState.alphalab_answers).toBeTruthy();
+
+              const sigBeforeReload = await captureSignature(page);
+              expect(sigBeforeReload).toBeTruthy();
+
+              await page.reload({ waitUntil: 'domcontentloaded' });
+              await waitForStableReport(page, 12000, 500);
+              await verifyCriticalNodes(page);
+
+              const sigAfterReload = await captureSignature(page);
+              expect(sigAfterReload).toBeTruthy();
+              expect(sigAfterReload).toBe(sigBeforeReload);
+
+              expect(pageErrors, `Console/page errors for ${persona.code}`).toEqual([]);
+            });
+          }
+          EOF
+
+      - name: Run all-20 personas suite
+        run: npx playwright test tests/generated/all-20-personas.generated.spec.ts --project=${{ inputs.browser }} --workers=1
+
+      - name: Upload HTML report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: all-20-personas-html-${{ inputs.browser }}
+          path: playwright-report
+          retention-days: 14
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: all-20-personas-results-${{ inputs.browser }}
+          path: test-results
+          retention-days: 14
