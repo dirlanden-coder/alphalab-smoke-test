@@ -1,0 +1,63 @@
+name: AlphaLab Smoke Test
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'AlphaLab_v16j__SCENARIO_OVERWRITE_GUARD__LOW_RISK_PATCH_v1__SUGAR_AXIS_AUTHORITY_FINAL_HOTFIX v2.html'
+      - 'ONBOARDING__STABILIZED__3STEP__P05__GREEK20__GREEK_LABELS__REVISED_BADGES__ALL_PASS__POINTS_TO_SCENARIO_OVERWRITE_GUARD_REPORT__POINTS_TO_SUGAR_AXIS_AUTHORITY_FINAL_HOTFIX v2.html'
+      - 'tests/**'
+      - 'playwright.config.js'
+      - 'package.json'
+      - 'package-lock.json'
+      - '.github/workflows/alphalab-smoke.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'AlphaLab_v16j__SCENARIO_OVERWRITE_GUARD__LOW_RISK_PATCH_v1__SUGAR_AXIS_AUTHORITY_FINAL_HOTFIX v2.html'
+      - 'ONBOARDING__STABILIZED__3STEP__P05__GREEK20__GREEK_LABELS__REVISED_BADGES__ALL_PASS__POINTS_TO_SCENARIO_OVERWRITE_GUARD_REPORT__POINTS_TO_SUGAR_AXIS_AUTHORITY_FINAL_HOTFIX v2.html'
+      - 'tests/**'
+      - 'playwright.config.js'
+      - 'package.json'
+      - 'package-lock.json'
+      - '.github/workflows/alphalab-smoke.yml'
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v5
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: lts/*
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium
+
+      - name: Run unified smoke test
+        run: npx playwright test
+
+      - name: Upload Playwright report
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v5
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30
+
+      - name: Upload Playwright results
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v5
+        with:
+          name: playwright-test-results
+          path: test-results/
+          retention-days: 30
